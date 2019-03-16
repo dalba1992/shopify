@@ -1,0 +1,168 @@
+{% unless settings.slides_mode %}
+{% if section.settings.limit != blank %}
+    {%- assign product_limit = section.settings.limit -%}
+{% endif %}
+{%- assign collection = collections[section.settings.collection] -%}
+{% if section.settings.limit_2 != blank %}
+    {%- assign product_limit_2 = section.settings.limit_2 -%}
+{% endif %}
+{%- assign collection_2 = collections[section.settings.collection_2] -%}
+<div class="holder  {{ section.settings.outer_margin }}">
+    <div class="container">
+        <div class="row vert-margin-double">
+            <div class="col-md-8">
+                <div {% if section.settings.collection != blank and section.settings.tabs and section.settings.tags != blank %}class="title-with-right"{% else %}class="title-wrap text-left"{% endif %}>
+                    <h2 class="h1-style">{{ section.settings.title }}</h2>
+                    {% if section.settings.collection != blank and section.settings.tabs and section.settings.tags != blank %}
+                    <div class="prd-carousel-tabs js-filters-prd">
+                        <span class="filters-label active" data-filter=".tag-all-{{ collection.handle }}">{{ 'general.theme.all' | t }}</span>
+                        {%  assign tags = section.settings.tags | split:',' %}
+                        {% for tag in tags %}
+                        <span class="filters-label" data-filter=".tag-{{ tag | handle }}">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="prd-grid data-to-show-3 data-to-show-md-2 data-to-show-sm-3 data-to-show-xs-2 js-product-isotope prd-text-center prd-grid--sm-pad">
+                    {% for product in collection.products limit: product_limit %}
+                        {% include 'product-card' %}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            To Init <b>Product's carousel</b>:<br />
+                            1.<b>Choose Collection</b><br />
+                            2.<b>Save</b>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if section.settings.show_view_all and section.settings.collection != blank %}<div class="more-link-wrapper text-center"><a href="{{ collection.url }}" class="btn-decor">{{ 'general.theme.show_all' | t }}</a></div>{% endif %}
+            </div>
+            <div class="col-md-4">
+                <div class="vert-margin">
+                    <div>
+                        <h2 class="h1-style text-center-sm">{{ section.settings.title_2 }}</h2>
+                        <div class="single-prd-carousel data-slick prd-text-center"
+                             data-slick='{"slidesToShow": 1, "dots": true, "arrows": false, "adaptiveHeight": false}'>
+                            {% for product in collection_2.products limit: product_limit_2 %}
+                                {% include 'product-card' grid_image_width:'368x',quick_view_in_mobile:1 %}
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    To Init <b>Product's carousel</b>:<br />
+                                    1.<b>Choose Collection</b><br />
+                                    2.<b>Save</b>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {{ section.settings.html }}
+                </div></div>
+        </div>
+    </div>
+</div>
+{% endunless %}
+{% schema %}
+{
+"name": "Products Grid - Advanced",
+"class": "index-section",
+"settings": [
+{
+"type": "header",
+"content": "Layout"
+},
+{
+"type": "select",
+"id": "outer_margin",
+"label": "Outer top margin",
+"options":[
+{"value":"mt-0","label":"None"},
+{"value":"mt-1","label":"10px"},
+{"value":"mt-2","label":"20px"},
+{"value":"mt-3","label":"30px"},
+{"value":"mt-4","label":"40px"},
+{"value":"mt-5","label":"50px"},
+{"value":"mt-6","label":"60px"},
+{"value":"mt-65","label":"65px"},
+{"value":"mt-7","label":"70px"},
+{"value":"mt-8","label":"80px"},
+{"value":"mt-9","label":"90px"},
+{"value":"mt-10","label":"100px"}
+],
+"default": "mt-65"
+},
+{
+"type": "header",
+"content": "General"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Collection"
+},
+{
+"id": "collection",
+"type": "collection",
+"label": "Collection"
+},
+{
+"id": "limit",
+"type": "text",
+"label": "Products limit",
+"info":"if no limit keep empty, for better perfomance try reduce limit and enable 'View all' button",
+"default":"6"
+},
+{
+"type": "checkbox",
+"id": "show_view_all",
+"label": "Show 'Show all' button",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "tabs",
+"label": "Show Filter by Tags",
+"default": false
+},
+{
+"type": "textarea",
+"id": "tags",
+"label": "Write product's tags separated by coma",
+"default": "popular, sale, new",
+"info": "for example popular, sale, new. Tags must be assigned to products from the selected collection as well."
+},
+{
+"type": "header",
+"content": "Carousel right"
+},
+{
+"type": "text",
+"id": "title_2",
+"label": "Heading",
+"default": "deal of the day"
+},
+{
+"id": "collection_2",
+"type": "collection",
+"label": "Collection"
+},
+{
+"id": "limit_2",
+"type": "text",
+"label": "Products limit",
+"info":"if no limit keep empty, for better perfomance try reduce limit and enable 'View all' button",
+"default":"3"
+},
+{
+"type":"textarea",
+"id":"html",
+"label":"Paste generated html here",
+"info":"generate banners [here](http://frontend.big-skins.com/goodwin-html/banners-generator)"
+}
+],
+"presets": [
+{
+"name": "Products Grid - Advanced",
+"category": "Collections Grid"
+}
+]
+}
+{% endschema %}

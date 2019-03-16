@@ -1,0 +1,38 @@
+{% if collection %}
+    {% for prod in collection.products %}
+        {% if prod.handle == product.handle %}
+            {% assign curr_prod_index = forloop.index0 %}
+        {% endif %}
+    {% endfor %}
+    {% assign max = collection.products.size | minus:1 %}
+    {% assign prev=curr_prod_index | minus:1 %}
+    {% if prev == -1 %}{% assign prev = max %}{% endif %}
+    {% assign next=curr_prod_index | plus:1 %}
+    {% if next > max %}{% assign next = 0 %}{% endif %}
+    {% assign prev_product=collection.products[prev] %}
+    {% assign next_product=collection.products[next] %}
+    <div class="prd-block-prevnext">
+        <a href="{{ next_product.url | within: collection}}" class="prd-block-prevnext-arrow js-prd-block-next"><i class="icon-angle-right"></i></a>
+        <div class="prd-next">
+            <div class="prd-next-img"><img src="{{ next_product.featured_image | img_url: 'compact' }}"  alt="{{ next_product.title }}"></div>
+            <div class="prd-next-info">
+                <div class="prd-next-tag"><span>{{ next_product.vendor }}</span></div>
+                <h2 class="prd-next-title"><a href="{{ next_product.url | within: collection}}">{{ next_product.title | truncate: 26 }} </a></h2>
+                <div class="prd-prevnext-price">
+                    <div class="price-new">{{ next_product.price | money }}</div>
+                </div>
+            </div>
+        </div>
+        <a href="{{ prev_product.url | within: collection}}" class="prd-block-prevnext-arrow js-prd-block-prev"><i class="icon-angle-left"></i></a>
+        <div class="prd-prev">
+            <div class="prd-next-img"><img src="{{ prev_product.featured_image | img_url: 'compact' }}" alt="{{ prev_product.title }}"></div>
+            <div class="prd-next-info">
+                <div class="prd-next-tag"><span>{{ prev_product.vendor }}</span></div>
+                <h2 class="prd-next-title"><a href="{{ prev_product.url | within: collection}}">{{ prev_product.title | truncate: 26 }}</a></h2>
+                <div class="prd-prevnext-price">
+                    <div class="price-new">{{ prev_product.price | money }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

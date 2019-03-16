@@ -1,0 +1,13 @@
+{% if section.settings.topline_enable %}
+    
+    <!-- Promo TopLine -->
+    <div>
+        <div class="promo-topline" data-expires="{{ section.settings.topline_expires }}" style="display: none;">
+            <div class="container">
+              <div class="promo-topline-item"><b>{{ section.settings.topline_caption }}</b></div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- /Promo TopLine -->
+{% endif %}

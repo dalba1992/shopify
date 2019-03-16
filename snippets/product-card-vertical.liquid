@@ -1,0 +1,9 @@
+<div class="prd-vertical-sm">
+    <div class="prd-img"><a href="{{ product.url }}"><img src="{{ product.featured_image.src | img_url: '93x110' }}" srcset="{{ product.featured_image.src | img_url: '93x110' }} 1x,{{ product.featured_image.src | img_url: '93x110', scale:2 }} 2x" alt="{{ product.featured_image.alt | escape }}"></a></div>
+    <div class="prd-info">
+        <div class="prd-tag"><span>{{ product.vendor }}</span></div>
+        <h2 class="prd-title"><a href="{{ product.url }}">{{ product.title }}</a></h2>
+        <div class="prd-rating"><span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></div>
+        {% include 'product-card-price' %}
+    </div>
+</div>

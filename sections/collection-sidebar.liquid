@@ -1,0 +1,105 @@
+{% assign collection_left_sidebar = settings.collection_left_sidebar %}{% if collection_left_sidebar %}{% assign collection_left_sidebar = 1 %}{% endif %}
+{% assign collection_filter_ajax = settings.ajax %}{% if collection_filter_ajax %}{% assign collection_filter_ajax = 1 %}{% endif %}
+{% assign t_item =  'general.theme.item' | t %}
+{% assign t_items = 'general.theme.items_c' | t %}
+<script>tag_group=[];</script>
+
+<div class="fixed-col_container">
+    <div class="fstart"></div>
+    <div class="fixed-wrapper">
+        <div class="fixed-scroll">
+            <div class="fixed-col_content">
+                <div class="filter-close">DONE</div>
+                <div class="sidebar-block sidebar-block--mobile d-block d-lg-none">
+                    <div class="d-flex align-items-center">
+                        <div class="selected-label">{{ 'general.theme.filters' | t }}</div>
+                        <div class="selected-count ml-auto">SELECTED <span><b>{{ collection.products_count }} {{ paginate.items | pluralize: t_item, t_items }}</b></span></div>
+                    </div>
+                </div>
+                {% include 'collection-filter-current' %}
+                {% for block in section.blocks %}
+                    {% include 'collection-filter-group' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="fend"></div>
+</div>
+
+
+<script>
+    $(function(){
+        Shopify.queryParams = {};
+        updateQueryParams();
+        {% if collection_filter_ajax == 1 %}
+            $(document).on('click','.fixed-col_content li a, a.clear-filters, .clear-all a',function(e){
+                url=$(this).attr('href').replace('#','');
+                $('.prd-grid-wrap').addClass('is-loading');
+                postAjaxJsInit(url);
+                e.preventDefault();
+            })
+        {% endif %}
+    })
+</script>
+
+{% schema %}
+{
+"name": "Sidebar (filter by tags)",
+"settings": [
+{
+"type": "paragraph",
+"content": "[Documentation](http://big-skins.com/goodwin/shopify/manuals/#SetupSidebarFilter)"
+},
+{
+"type": "header",
+"content": "Settings"
+},
+{
+"type": "checkbox",
+"id": "shopping_by",
+"label": "Enable Shopping by Tag",
+"default": true,
+"info": "block shows checked filter items"
+}
+],
+"blocks": [
+{
+    "type": "group",
+    "name": "Group of tags",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "info":"for ex. Price, Colors, Size, Brands etc"
+        },
+        {
+            "type": "textarea",
+            "id": "tags",
+            "label": "Tags",
+            "info": "Write product tags, separated by comma. Make sure that the tags are the same as in the products."
+        },
+        {
+            "type": "select",
+            "id": "style",
+            "label": "Style",
+            "options": [
+                { "value": "category-list", "label": "List" },
+                { "value": "size-list", "label": "Sizes" },
+                { "value": "color-list", "label": "Color Pics" },
+                { "value": "banners-list", "label": "Banners pics" }
+            ],
+            "default": "category-list",
+            "info": "If you choose color pics, you need upload in settings\/files pic image, color-tagname.png 27 x 27 px. if you choose Banners pics, you have to upload to settings\/files pic image, color-tagname.png 115 x 115 px."
+        }
+    ]
+}
+]
+}
+{% endschema %}

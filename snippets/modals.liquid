@@ -1,0 +1,68 @@
+<div class="modal--checkout" id="modalCheckOut" style="display: none;">
+    <div class="modal-header">
+        <div class="modal-header-title"><i class="icon icon-check-box"></i><span>{{ 'general.theme.has_been_added_to_cart' | t}}</span></div>
+    </div>
+    <div class="container pb-3">
+                <div class="row">
+                    <div class="modalchk-prd-image col">
+
+                    </div>
+                    <div class="modalchk-prd-info col">
+                        <h2 class="modalchk-title">&nbsp;</h2>
+                        <div class="modalchk-price"></div>
+                        <div class="prd-options">
+                            <span class="label-options"></span>
+                        </div>
+                    </div>
+      </div>
+      <div class="row">
+                        <div class="col">
+                         Cart {{ 'cart.general.subtotal' | t }} ({{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }}):
+        </div>
+        <div class="col flex-grow-0 font-weight-bold modalchk-total-price js-mdlchk-prd-total">
+                        </div>
+      </div>
+                        <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-lg btn-block btn--alt " data-fancybox-close>{{ 'products.product.continue_shopping' | t }}</button>
+                          <a href="/checkout" class="btn btn-primary btn-lg btn-block font-26">{{ 'cart.general.checkout_procees' | t }}</a>
+                        </div>
+      </div>
+      <div class="row">
+                      <div class="col-12 mt-3 secure-checkout">
+                  <div class="secure-title"><svg class="icon-lock-solid mr-1"><use xlink:href="#icon-lock-solid"></use></svg><span>100% Secure Checkout</span></div>
+              	<div class="secure-icons mt-2 text-center"><svg class="icon-secure-mcafee mr-2"><use xlink:href="#icon-secure-mcafee"></use></svg>
+                  <svg class="icon-secure-norton"><use xlink:href="#icon-secure-norton"></use></svg></div>
+              </div>
+                      <div class="col-12 d-flex payment-icons">
+              <div class="d-flex mb-lg-2">
+              <svg class="icon-payment-visa"><use xlink:href="#icon-payment-visa"></use></svg>
+              <svg class="icon-payment-mastercard"><use xlink:href="#icon-payment-mastercard"></use></svg>
+              <svg class="icon-payment-discover"><use xlink:href="#icon-payment-discover"></use></svg>
+              <svg class="icon-payment-amex"><use xlink:href="#icon-payment-amex"></use></svg>
+                </div>
+                <div class="d-flex">
+              <svg class="icon-payment-paypal"><use xlink:href="#icon-payment-paypal"></use></svg>
+              <svg class="icon-payment-amazon-pay"><use xlink:href="#icon-payment-amazon-pay"></use></svg>
+              <svg class="icon-payment-apple-pay"><use xlink:href="#icon-payment-apple-pay"></use></svg>
+              <svg class="icon-payment-google-pay"><use xlink:href="#icon-payment-google-pay"></use></svg>
+                </div>
+              </div>
+                   
+              </div>
+    </div>
+</div>
+
+<div id="modalSuccess" class="modal-info modal--success" data-animation-duration="700" style="display: none;">
+	<div class="modal-text"><i class='icon icon-check-box modal-icon-info'></i><div>Product added to cart successfully!</div></div>
+</div>
+<div id="modalError" class="modal-info modal--error" data-animation-duration="700" style="display: none;">
+	<div class="modal-text"><i class='icon icon-error modal-icon-info'></i><div>Oops! Something went wrong!</div></div>
+</div>
+<div id="modalChat" class="modal-info modal--success" data-animation-duration="700" style="display: none;">
+  <div class="modal-text"><i class='icon icon-check-box modal-icon-info'></i><div>Theme is compatible with any <a href="https://www.google.com.ua/search?q=free+live+chat" target="_blank">free chat</a></div></div>
+</div>
+
+
+
+

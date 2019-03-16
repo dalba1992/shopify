@@ -1,0 +1,47 @@
+{% unless template == 'index' or template contains 'home-page-' or template contains '404' %}
+{% assign t_item =  'general.theme.item' | t %}
+{% assign t_items = 'general.theme.items_c' | t %}
+<div class="holder mt-0">
+    <div class="container">
+        <ul class="breadcrumbs">
+            <li><a href="/"  title="{{ 'homepage.breadcrumbs.home' | t }}">{{ 'homepage.breadcrumbs.home' | t }}</a></li>
+            {% if template contains 'product' %}
+                {% if collection %}
+                    {% if collection.handle %}
+                        {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+                        <li>{{ collection.title | link_to: url }}</li>
+                    {% endif %}
+                {% endif %}
+            {% elsif template contains 'collection' and collection.handle %}
+                <li>
+
+                        <span>{{ collection.title }}</span>
+
+                </li>
+            {% elsif template == 'blog' %}
+                <li>
+                    {% if current_tags %}
+                        {{ blog.title | link_to: blog.url }}
+                        <span>{{ current_tags | join: " + " }}</span>
+                    {% else %}
+                        <span>{{ blog.title }}</span>
+                    {% endif %}
+                </li>
+            {% elsif template == 'article' %}
+                <li>{{ blog.title | link_to: blog.url }}</li>
+                <li>{{ article.title }}</li>
+            {% elsif template contains 'page' %}
+                <li>
+                    <span>{{ page.title }}</span>
+                </li>
+            {% else %}
+                <li>
+                    <span>{{ page_title }}</span>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endunless %}
+
+

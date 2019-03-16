@@ -1,0 +1,16 @@
+{% if section.settings.logo_yes %}
+    {%- assign logo_max_width = section.settings.logo_max_width -%}
+    {%- assign logo = section.settings.logo -%}
+    {% if logo != blank %}
+        {% assign logo = logo | img_url: image_size %}
+        {% assign logo_2x = logo | img_url: image_size, scale: 2 %}
+    {% endif %}
+    <a href="{{ shop.url }}" title="{{ shop.name }}">
+        {% if logo != blank %}
+            {% capture image_size %}{{ logo_max_width }}x{% endcapture %}
+            <img src="{{ section.settings.logo  | img_url:'master' }}" alt='{{ shop.name }}' class="img-responsive"/>
+        {% else %}
+            <img src="{{ 'ilovepaws-logo.svg' | asset_url }}" alt="{{ shop.name }}" />
+        {% endif %}
+    </a>
+{% endif %}

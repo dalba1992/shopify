@@ -1,0 +1,32 @@
+{% assign show_label_sale = section.settings.show_label_sale %}
+{% assign show_label_new = section.settings.show_label_new %}
+{% assign product_sku = section.settings.product_sku %}
+{% assign product_availability = section.settings.product_availability %}
+{% assign product_inventory_count = section.settings.product_inventory_count %}
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    {% assign variant = product.selected_or_first_available_variant %}
+    {% capture price %}{{ product.price | money }}{% endcapture %}
+    <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+    <meta itemprop="price" content="{{ product.selected_or_first_available_variant.price | divided_by: 100.00 }}">
+    <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+    <div class="prd-block_info product-info-block-id-{{ product.id }}">
+        <div class="js-prd-d-holder prd-holder">
+            <div class="prd-block_title-wrap">
+                <h1 class="prd-block_title">{{ product.metafields.c_f.title }}</h1>
+            </div>
+            <div class="prd-block_info-top">
+                {% if section.settings.product_rating %}
+                    <div class="prd-rating">
+                        <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" style="display: block;">{{ product.metafields.stamped.badge }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            {% assign introtext = product.metafields.c_f.introtext %}
+            {% if introtext != blank %}
+                {% if introtext != '-' %}
+                    <div class="prd-block_description">{{ introtext }}</div>
+                {% endif %}
+            {% endif %}         
+       </div>
+    </div>
+</div>

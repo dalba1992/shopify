@@ -1,0 +1,10 @@
+<select name="id" class="form-control product-card-selectbox" data-product-select="{{ product.id }}"  tabindex="0">
+    {% for variant in product.variants %}
+        {% assign option_price = variant.price | money %}
+        {% assign option_price = option_price | replace:"<span class='money'>",'' | replace:"</span>" %}
+        <option {% unless variant.available %}disabled{% endunless %} value="{{ variant.id }}" {% if variant.id == product.selected_or_first_available_variant.id %}selected="selected"{% endif %}>{% unless variant.available %}- {% endunless %}{{ variant.title }} {{ option_price }}</option>
+    {% endfor %}
+</select>
+<div class="product-select-{{ product.id }} hidden">
+    {% for variant in product.variants -%}<div {% unless variant.available %}data-disabled="disabled"{% endunless %} data-value="{{ variant.id }}">{% unless variant.available %}- {% endunless %}{{ variant.title }} {{- variant.price | money -}}</div>{% endfor %}
+</div>

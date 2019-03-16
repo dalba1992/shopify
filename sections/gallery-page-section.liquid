@@ -1,0 +1,615 @@
+<style>
+  /* Pulse Shrink */
+  @-webkit-keyframes hvr-pulse-shrink {
+    to {
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  }
+  @keyframes hvr-pulse-shrink {
+    to {
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  }
+  .image-hover-2-wrapper {
+    position: relative;
+  }
+  .comparison-item {
+/*     padding-left: inherit; */
+  }
+  .js-comparison-container {
+	overflow: hidden;
+    width: 100%;
+/*     min-height: 350px; */
+  }
+  .comparison-image {
+    width: auto !important;
+    left: 15px;
+    max-height: 100%;
+  }
+  .comparison-item--first {
+    left: auto;
+    max-width: calc(100% - 25px) !important;
+    min-width: 25px !important;
+  }
+  .comparison-control {
+    position: absolute;
+    height: 44px;
+    width: 44px;
+    left: 50%;
+    top: 50%;
+    margin-left: -22px;
+    margin-top: -22px;
+    border-radius: 50%;
+    background: #339af0 url('{{ 'cd-arrows.svg' | asset_url }}') no-repeat center center;
+    background-size: 94%;
+    cursor: move;
+    box-shadow: 0px 0 5px 2px rgba(0,0,0,.2), 0 0 10px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  .comparison-control:before {
+    content: 'Click & Drag';
+    display: block;
+    margin-top: 50px;
+    margin-left: calc(50% - 60px);	
+    color: white;
+    font-size: 20px;
+    text-shadow: 2px 1px 1px black;
+    width: 120px;
+    text-align: center;
+  }
+  .comparison-separator, .comparison-control:before {
+     transition: opacity 300ms linear;
+     -moz-transition: opacity 300ms linear;
+     -webkit-transition: opacity 300ms linear;
+   }
+  .comparison-item__label {
+    min-width: 64px;
+    text-align: center;
+  }
+  .comparison-control__mask {
+    width: 27px;
+    height: 27px;
+    top: 0;
+    left: 0;
+  }
+  .comparison-separator {
+    background: transparent;
+  }
+  .comparison-separator.actived .comparison-control:before {
+    opacity: 0;
+  }
+  .clearfix:before,
+  .clearfix:after {
+      content: ".";    
+      display: block;    
+      height: 0;    
+      overflow: hidden; 
+  }
+  .clearfix:after { clear: both; }
+  .clearfix { zoom: 1; } /* IE < 8 */
+  .controls-wrapper span {
+    margin-right: 10px;
+  }
+  .controls-wrapper .btn.active{
+    background-color: #ed1b3e;
+    border: 1px solid #ed1b3e;
+    color: #ffffff;
+    box-shadow: none;
+  }
+  .controls-wrapper .btn{
+    background-color: #ffffff;
+    border: 1px solid #444444;
+    color: #444444;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 10px 16px;
+  }
+  @media (max-width: 991px) {
+  .controls-wrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 60px;
+    background: #ffffff;
+    z-index: 100;
+  }
+  }
+  .comparison-separator:not(.actived) .comparison-control {
+  	-webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    -webkit-animation-name: hvr-pulse-shrink;
+    animation-name: hvr-pulse-shrink;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+  }
+  .fancybox-btn {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000 !important;
+    width: 40px;
+    height: 40px;
+    pointer-events: auto;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+    text-decoration: none !important;
+    border-radius: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 300ms linear;
+    -moz-transition: background-color 300ms linear;
+    -webkit-transition: background-color 300ms linear;
+  }
+  .fancybox-btn i {
+    text-decoration: none;
+  }
+  .fancybox-btn:hover {
+    background-color: rgba(255, 255, 255, 1) !important;
+  }
+  .hidden {
+    display: none !important;
+  }
+  .lazyload, .lazyloading {
+  opacity: 0; }
+  .lazyloaded {
+  opacity: 1;
+    transition: opacity 500ms; }
+</style>
+<script>
+  jQuery(function() {
+    var imageComparisonCollection = document.querySelectorAll('.js-comparison-container');
+      for (var i = 0; i < imageComparisonCollection.length; i++) {
+        var imageWidget = imageComparisonCollection[i];
+        var images = imageWidget.querySelectorAll('.comparison-image');
+        imageComparisonInstance = new ImageComparison({
+          container: imageWidget,
+          startPosition: 50,
+          data: [
+            {
+              image: images[0],
+              label: 'Photo'
+            },
+            {
+              image: images[1],
+              label: 'Artwork'
+            }
+          ],
+        });
+      }
+        
+    $('.gallery-item.toggle-effect').on('click', function(){
+      if ($(window).width() < 1025) {
+        $(this).siblings().removeClass('hovered');
+        $(this).toggleClass('hovered');
+      }
+    })
+    
+    $('input[type=radio][name=paintingSwitch]').change(function() {
+      $('.cartoon-image, .painting-image').toggleClass('hidden');
+      $('.painting-custom-label').toggleClass('hidden');
+      $('.fancybox-btn').toggleClass('hidden');
+    });
+    
+    $(".fancybox-btn").fancybox({
+      	closeBtn: true,
+      	buttons: [
+          "close"
+        ],
+      	clickOutside: false,
+		hideOnOverlayClick:false,
+      	hideOnContentClick:false,
+      	helpers: {
+          overlay: { closeClick: false } //Disable click outside event
+        }
+
+    });
+    
+    $('.fancybox-btn').on('click', function(event){
+      event.stopPropagation();
+    })
+    
+    $(".fancybox-bg").unbind();
+    
+  })
+</script>
+
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col page-title">
+    <h1>Artwork {{ page.title }}</h1>
+</div>
+    </div>
+      <div class="row controls-wrapper">
+      <div class="col py-3 text-center">
+        <span>Style:</span>
+        <div class="btn-group btn-group-toggle switch-painting-btns" data-toggle="buttons">
+          <label class="btn active">
+            <input type="radio" name="paintingSwitch" id="option1" autocomplete="off" value="cartoon" checked>Cartoon
+          </label>
+          <label class="btn">
+            <input type="radio" name="paintingSwitch" id="option2" autocomplete="off" value="painting">Painting
+          </label>
+        </div> 
+      </div>
+    </div>
+
+    <div class="row mt-2">
+	  <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img id="comparison-image-size" class="img-responsive comparison-image" src="{{ 'artwork-gallery-photo-11815_1x.jpg' | asset_url }}" srcset="{{ 'artwork-gallery-photo-11815_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11815_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11815_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11815_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image" src="{{ 'artwork-gallery-cartoon-style-11815_1x.jpg' | asset_url }}" srcset="{{ 'artwork-gallery-cartoon-style-11815_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11815_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11815_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11815_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11815_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11815_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11815_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11815_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11815_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image" src="{{ 'artwork-gallery-photo-11662_1x.jpg' | asset_url }}" srcset="{{ 'artwork-gallery-photo-11662_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11662_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11662_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11662_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image" src="{{ 'artwork-gallery-cartoon-style-11662_1x.jpg' | asset_url }}" srcset="{{ 'artwork-gallery-cartoon-style-11662_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11662_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11662_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11662_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11662_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11662_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11662_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11662_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11662_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image" src="{{ 'artwork-gallery-photo-11973_1x.jpg' | asset_url }}" srcset="{{ 'artwork-gallery-photo-11973_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11973_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11973_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11973_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image" src="{{ 'artwork-gallery-cartoon-style-11973_1x.jpg' | asset_url }}" srcset="{{ 'artwork-gallery-cartoon-style-11973_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11973_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11973_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11973_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11973_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11973_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11973_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11973_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11973_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" src="{{ 'loading.jpg' | asset_url }}" data-src="{{ 'artwork-gallery-photo-11666_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-11666_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11666_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11666_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11666_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" src="{{ 'loading.jpg' | asset_url }}" data-src="{{ 'artwork-gallery-cartoon-style-11666_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11666_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11666_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11666_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11666_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11666_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11666_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11666_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11666_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11666_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-11847_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-11847_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11847_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11847_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11847_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-11847_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11847_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11847_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11847_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11847_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11847_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11847_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11847_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11847_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11847_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-11924_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-11924_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11924_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11924_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11924_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-11924_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11924_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11924_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11924_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11924_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11924_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11924_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11924_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11924_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11924_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-11023_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-11023_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11023_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11023_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11023_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-11023_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11023_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11023_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11023_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11023_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11023_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11023_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11023_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11023_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11023_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-11188_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-11188_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-11188_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-11188_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-11188_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-11188_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11188_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11188_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11188_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11188_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-11188_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-11188_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-11188_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-11188_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-11188_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-10268_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-10268_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-10268_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-10268_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-10268_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-10268_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10268_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10268_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10268_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10268_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-10268_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10268_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10268_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10268_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10268_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 mb-md-0 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-10241_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-10241_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-10241_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-10241_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-10241_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-10241_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10241_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10241_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10241_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10241_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-10241_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10241_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10241_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10241_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10241_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 mb-4 mb-sm-0 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-10772_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-10772_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-10772_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-10772_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-10772_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-10772_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10772_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10772_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10772_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10772_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-10772_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10772_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10772_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10772_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10772_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 px-3 px-xl-5 min-h">
+        <div class="js-comparison-container clearfix">
+          <img class="img-responsive comparison-image lazyload" data-src="{{ 'artwork-gallery-photo-10020_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-photo-10020_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-photo-10020_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-photo-10020_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-photo-10020_4x.jpg' | asset_url }} 4x" alt="">
+          <img class="img-responsive comparison-image cartoon-image lazyload" data-src="{{ 'artwork-gallery-cartoon-style-10020_1x.jpg' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10020_1x.jpg' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10020_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10020_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10020_4x.jpg' | asset_url }} 4x" alt="">
+
+          <div class="image-hover-2-wrapper">
+            <div class="comparison-item__label painting-custom-label hidden">Artwork</div>
+            <img class="img-responsive comparison-image painting-image hidden" src="{{ 'coming-soon.svg' | asset_url }}" alt="">
+          </div>
+          
+          
+          <a class="fancybox-btn" rel="fancybox-btn" href="{{ 'artwork-gallery-cartoon-style-10020_1x' | asset_url }}" data-srcset="{{ 'artwork-gallery-cartoon-style-10020_1x' | asset_url }} 1x, {{ 'artwork-gallery-cartoon-style-10020_2x.jpg' | asset_url }} 2x, {{ 'artwork-gallery-cartoon-style-10020_3x.jpg' | asset_url }} 3x, {{ 'artwork-gallery-cartoon-style-10020_4x.jpg' | asset_url }} 4x" data-title-id="Cartoon" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+          <a class="fancybox-btn hidden" rel="fancybox-btn" href="{{ 'coming-soon.svg' | asset_url }}" data-title-id="Painting" class="prd-block_zoom-link">
+            <svg class="icon-zoom-in"><use xlink:href="#icon-zoom-in"></use></svg>
+          </a>
+          
+        </div>
+      </div>
+
+    </div>   
+  </div>
+</div>
+
+
+
+
+{% schema %}
+{
+"name": "Gallery",
+"settings": [
+{
+"type": "text",
+"id": "subtitle_notouch",
+"label": "Subtitle for no touch devices",
+"default": "Hover image"
+},
+{
+"type": "text",
+"id": "subtitle_touch",
+"label": "Subtitle for touch devices",
+"default": "Click image"
+},
+{
+"type": "checkbox",
+"id": "gallery_filters",
+"label": "Apply tags filter",
+"default": true
+},
+{
+"type": "text",
+"id": "delay",
+"label": "Opacity delay in s",
+"default": "5"
+},
+{
+"type": "select",
+"id": "per_row_desctop",
+"label": "Products per row Desctop",
+"options":[
+{"value":"2","label":"2"},
+{"value":"3","label":"3"},
+{"value":"4","label":"4"}
+],	
+"default": "3"
+},
+{
+"type": "select",
+"id": "per_row_tablet",
+"label": "Products per row Tablet (1024..575px)",
+"options":[
+{"value":"2","label":"2"},
+{"value":"3","label":"3"},
+{"value":"4","label":"4"}
+],	
+"default": "2"
+},
+{
+"type": "select",
+"id": "per_row_mobile",
+"label": "Products per row Mobile",
+"options":[
+{"value":"1","label":"1"},
+{"value":"2","label":"2"}
+],	
+"default": "2"
+}
+],
+"blocks":[
+{
+"type":"Photo",
+"name":"Photo",
+"settings":[
+{
+"type": "checkbox",
+"id": "enable",
+"label": "Enable",
+"default": true
+},
+{
+"type": "textarea",
+"id": "title",
+"label": "Title"        
+}, 
+
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+},
+{
+"type": "image_picker",
+"id": "image_hover",
+"label": "Image Hover"
+},
+{
+"type": "image_picker",
+"id": "image_hover_2",
+"label": "Image Hover 2"
+},
+{
+"type": "text",
+"id": "tags",
+"label": "Tag filter ",
+"info": "write tags, separated by comma",
+"default": "category-1"
+}
+]
+}
+]
+}
+{% endschema %}
+
+
+
+{% javascript %}
+{% endjavascript %}

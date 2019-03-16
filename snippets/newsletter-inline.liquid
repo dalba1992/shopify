@@ -1,0 +1,23 @@
+<div class="holder bg-lgray py-5">
+  <div class="container text-center subscribe-form">
+      {% form 'customer', id:'footer-subsribe' %}
+        {% if form.posted_successfully? %}
+          <p class="form--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+        {% else %}
+            <div class="col-12 mb-3">
+              <h4>Let's Keep In Touch</h4>
+              <p>Sign up for special offers, sales and more.</p>
+          </div>
+          	<div class="col-12 col-sm-8 col-lg-6">
+              <div class="form-control-wrap">
+              <svg class="icon-mail"><use xlink:href="#icon-mail"></use></svg>
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input type="email" name="contact[email]"  class="form-control form-control-lg" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="Email Address"  >
+              <button type="submit" class="btn btn-primary btn-lg"><svg class="icon-angle-right"><use xlink:href="#icon-angle-right"></use></svg></button>
+              {{ form.errors | default_errors }}
+              </div>
+          	</div>
+              {% endif %}
+      {% endform %}
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<header class="hdr {{ header_width }}  {% if section.settings.sticky %}hdr_sticky{% endif %} hdr-mobile-style{{ section.settings.style_mobile }}">
+    {% include 'topline' %}
+    {% include 'mobile-navigation' %}
+    {% include 'header-mobile' %}
+    <div class="hdr-desktop hide-mobile">
+        <div class="hdr-topline">
+            <div class="container">
+                <div class="row">
+                    <div class="col-auto hdr-topline-left">
+                        {% include 'header-languages' %}
+                        {% include 'currency-picker' %}
+                    </div>
+                    <div class="col hdr-topline-center">
+                        <div class="custom-text">{{ section.settings.delivery }}</div>
+                        <div class="custom-text">{{ section.settings.phone_1 }}</div>
+                    </div>
+                    <div class="col-auto hdr-topline-right links-holder">
+                        {% include 'header-search' %}
+                        {% include 'wishlist-header' %}
+                        {% include 'header-login-form' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hdr-content hide-mobile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-auto logo-holder">
+                        {% include 'header-logo' %}
+                    </div>
+                    <!--navigation-->
+                    <div class="prev-menu-scroll icon-angle-left prev-menu-js"></div>
+                    <div class="nav-holder">
+                        <div class="hdr-nav">
+                            {% include 'header-navigation' %}
+                        </div>
+                    </div>
+                    <div class="next-menu-scroll icon-angle-right next-menu-js"></div>
+                    <!--//navigation-->
+                    <div class="col-auto minicart-holder">
+                        {% include 'header-cart' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'header-sticky' %}
+</header>

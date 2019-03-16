@@ -1,0 +1,12 @@
+<h4 class="text-center submenu-title">{{  collection.title }}</h4>
+<div class="prd-carousel-menu" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "arrows": true}'>
+    {% for product in collection.products limit: 4 %}
+        <div class="prd-sm">
+            <a href="{{ product.url }}" class="prd-img"><img src="{{ product.featured_image.src | img_url: '267x315' }}" alt="{{ product.featured_image.alt | escape }}"></a>
+            <div class="prd-info">
+                <h2  class="prd-title"><a href="{{ product.url | within:collection }}" title="{{ product.title }}">{{ product.title  | truncate: 35 }}</a></h2>
+                {% include 'product-card-price' %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,138 @@
+{% unless settings.slides_mode %}
+{% include 'global_vars' %}
+{%- assign image_size = '254x300' -%}
+{% if section.settings.limit != blank %}
+    {%- assign product_limit = section.settings.limit -%}
+{% endif %}
+{%- assign collection = collections[section.settings.collection] -%}
+{% assign per_row_desktop = section.settings.per_row_desktop %}
+{% if column %}{% assign per_row_desktop = 3 %}{% endif %}
+
+
+<div class="holder fullboxed  {{ section.settings.outer_margin }}">
+    <div class="container">
+        <div class="row vert-margin">
+            <div class="col-sm-5 col-md-4 col-lg-35 order-sm-2">
+                <div class="prd-carousel-banner bnr bnr--style-1-1 bnr--center bnr--top bg-cover" data-fontratio="2.976" style="background-image: url({% if section.settings.image %}{{ section.settings.image | img_url:'master' }}{% else %}{{ 'banner-nutrition-carousel-left.jpg'  | asset_url }}{% endif %});">
+                    <img src="{% if section.settings.image %}{{ section.settings.image | img_url:'master' }}{% else %}{{ 'banner-nutrition-carousel-left.jpg'  | asset_url }}{% endif %}" alt="" class="d-none d-sm-block">
+                    <span class="bnr-caption">
+						<span class="bnr-text-wrap">
+							<span class="bnr-text1">{{ section.settings.caption_1 }}</span>
+							<span class="bnr-text3">{{ section.settings.caption_2 }}</span>
+							<span class="bnr-text-p text-left">{{ section.settings.desc }}</span>
+						</span>
+					</span>
+                    <div class="carousel-arrows slick-arrows-squared"></div>
+                </div>
+            </div>
+            <div class="col-sm-7 col-md-8 col-lg-75">
+                <div class="prd-grid prd-text-center hide-price-comment prd-carousel js-prd-carousel js-product-isotope-sm data-to-show-3 data-to-show-sm-2 data-to-show-xs-2 sm-limit-4"
+                     data-slick='{"slidesToShow": 3, "responsive": [{"breakpoint": 1200,"settings": {"slidesToShow": 3}},{"breakpoint": 768,"settings": {"slidesToShow": 2}},{"breakpoint": 480,"settings": {"slidesToShow": 2}}]}'>
+                    {% for product in collection.products limit: product_limit %}
+                        {% include 'product-card', per_row: section.settings.per_row_desktop, grid_image_width: image_size %}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            To Init <b>Product's carousel</b>:<br />
+                            1.<b>Choose Collection</b><br />
+                            2.<b>Save</b>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if section.settings.show_view_all and section.settings.collection != blank %}<div class="more-link-wrapper text-center mt-3"><a href="{{ collection.url }}" class="btn-decor">{{ 'general.theme.show_all' | t }}</a></div>{% endif %}
+    </div>
+</div>
+{% endunless %}
+
+
+
+{% schema %}
+{
+    "name": "Full row - Style 6+promo",
+    "class": "index-section",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Layout"
+        },
+
+        {
+            "type": "select",
+            "id": "outer_margin",
+            "label": "Outer top margin",
+            "options":[
+{"value":"mt-0","label":"None"},
+{"value":"mt-1","label":"10px"},
+{"value":"mt-2","label":"20px"},
+{"value":"mt-3","label":"30px"},
+{"value":"mt-4","label":"40px"},
+{"value":"mt-5","label":"50px"},
+{"value":"mt-6","label":"60px"},
+{"value":"mt-65","label":"65px"},
+{"value":"mt-7","label":"70px"},
+{"value":"mt-8","label":"80px"},
+{"value":"mt-9","label":"90px"},
+{"value":"mt-10","label":"100px"}
+            ],
+            "default": "mt-65"
+        },
+        {
+            "type": "header",
+            "content": "General"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Collection"
+        },
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image",
+"info":"recommended width 323x421 (like in demo)"
+},
+{
+"type": "text",
+"id": "caption_1",
+"label": "Promo caption 1",
+"default": "CYBER"
+},{
+"type": "text",
+"id": "caption_2",
+"label": "Promo caption 2",
+"default": "SALES"
+},{
+"type": "text",
+"id": "desc",
+"label": "Promo description",
+"default": "Lorem ipsum dolor sit amet consest adicpising elitr anno dolor sit amet Nullam dui anno anno."
+},
+        {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection"
+        },
+        {
+            "id": "limit",
+            "type": "text",
+            "label": "Products limit",
+            "info":"if no limit keep empty, for better perfomance try reduce limit and enable 'View all' button",
+            "default":"6"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_view_all",
+            "label": "Show 'Show all' button",
+            "default": true
+        }
+    ],
+    "presets": [
+        {
+        "name": "Full row - Style 6+promo",
+        "category": "Collection's Carousel"
+        }
+    ]
+}
+{% endschema %}

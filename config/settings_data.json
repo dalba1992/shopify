@@ -1,0 +1,626 @@
+{
+  "current": {
+    "color_scheme": "light",
+    "column-left-right": "none-column",
+    "slides_mode": false,
+    "catalog_mode": false,
+    "rtl": false,
+    "back_to_top_desctop": true,
+    "wishlist": false,
+    "zoom_off": false,
+    "equal_height": false,
+    "product_ratio_w": "1",
+    "product_ratio_h": "1.18",
+    "ajax_cart": true,
+    "favicon": "",
+    "collection_left_sidebar": true,
+    "products_per_page": "12",
+    "ajax": true,
+    "collection_sort_enable": true,
+    "product_previews_colors": false,
+    "product_previews_colors_variants": true,
+    "show_out_of_stock": true,
+    "show_label_new": true,
+    "show_label_sale": true,
+    "show_quick_view": true,
+    "show_you_save": true,
+    "product_sku": true,
+    "product_availability": true,
+    "product_description": true,
+    "qv_show_label_new": true,
+    "qv_show_label_sale": true,
+    "product_options": "swatches",
+    "checkout_popup": true,
+    "checkout_popup_custom_html": "<div class=\"shop-feature-icon\"><i class=\"icon-box3\"><\/i><\/div> <div class=\"shop-feature-text\"> <div class=\"text1\">Delivery<\/div> <div class=\"text2\">Lorem ipsum dolor sit amet conset <\/div> <\/div>",
+    "checkout_popup_guaranteed_yes": true,
+    "checkout_popup_guaranteed_image": "",
+    "get_shipping_estimates": true,
+    "newsletter_title": "subscribe to newsletter",
+    "newsletter_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+    "newsletter_desc_footer_3": "Lorem ipsum dolor sit amet, cons ectetur adipiscing elit.",
+    "newsletter_footer_2_bg": "",
+    "newsletter_popup_yes": false,
+    "newsletter_popup_home_only_yes": false,
+    "newsletter_popup_logo": "",
+    "newsletter_popup_bg": "",
+    "newsletter_popup_title": "Sign up our newsletter",
+    "newsletter_popup_desc": "Enter Your email address to sign up to receive our latest news and offers",
+    "newsletter_popup_expires": "15",
+    "header12_enable_1": true,
+    "header12_image_1": "",
+    "header12_link_1": "",
+    "header12_link_target_1": "_self",
+    "header12_link_text_1": "Shop now",
+    "header12_caption_1_1": "FROM ONLY",
+    "header12_caption_1_2": "$120.00",
+    "header12_caption_1_3": "for kitchen Taps",
+    "header12_caption_tab_1": "$120.00 for bathroom taps",
+    "header12_enable_2": true,
+    "header12_image_2": "",
+    "header12_link_2": "",
+    "header12_link_target_2": "_self",
+    "header12_link_text_2": "Shop now",
+    "header12_caption_2_1": "",
+    "header12_caption_2_2": "SAVE 15%",
+    "header12_caption_2_3": "on Basins",
+    "header12_caption_tab_2": "save 15% on Basins",
+    "header12_enable_3": true,
+    "header12_image_3": "",
+    "header12_link_3": "",
+    "header12_link_target_3": "_self",
+    "header12_link_text_3": "Shop now",
+    "header12_caption_3_1": "FROM ONLY",
+    "header12_caption_3_2": "$100.00",
+    "header12_caption_3_3": "for baths",
+    "header12_caption_tab_3": "$100.00 for baths",
+    "shipping_calculator": "Enabled",
+    "shipping_calculator_heading": "Get shipping estimates",
+    "shipping_calculator_default_country": "United States",
+    "shipping_calculator_submit_button_label": "Calculate shipping",
+    "shipping_calculator_submit_button_label_disabled": "Calculating...",
+    "social_sharing_products": true,
+    "social_twitter_link": "#",
+    "social_facebook_link": "#",
+    "social_pinterest_link": "#",
+    "social_instagram_link": "#",
+    "social_tumblr_link": "",
+    "social_snapchat_link": "",
+    "social_youtube_link": "#",
+    "social_vimeo_link": "",
+    "shop_info_caption_1_1_text": "Satisfaction Guarantee",
+    "shop_info_caption_1_2_text": "Love it or money back",
+    "shop_info_caption_1_icon": "fal fa-smile",
+    "shop_info_caption_1_link": "#",
+    "shop_info_caption_2_1_text": "Exceptional Support",
+    "shop_info_caption_2_2_text": "Loved by all of our customers",
+    "shop_info_caption_2_icon": "fal fa-life-ring",
+    "shop_info_caption_2_link": "#",
+    "shop_info_caption_3_1_text": "Purchase Securely",
+    "shop_info_caption_3_2_text": "Your information is safe",
+    "shop_info_caption_3_icon": "fal fa-lock-alt",
+    "shop_info_caption_3_link": "#",
+    "shop_info_bg": "",
+    "icon-pay-1_yes": true,
+    "icon-pay-1_alt": "PayPal",
+    "icon-pay-2_yes": true,
+    "icon-pay-2_alt": "Visa",
+    "icon-pay-3_yes": false,
+    "icon-pay-3_alt": "Skrill",
+    "icon-pay-4_yes": true,
+    "icon-pay-4_alt": "MasterCard",
+    "icon-pay-5_yes": false,
+    "icon-pay-5_alt": "Discover",
+    "icon-pay-6_yes": false,
+    "icon-pay-6_alt": "ebay",
+    "icon-pay-7_yes": false,
+    "icon-pay-8_yes": false,
+    "icon-pay-9_yes": false,
+    "icon-pay-10_yes": false,
+    "insta_title": "Instagram",
+    "insta_token": "8136043898.1677ed0.5f6f0f08a4614a9f83fd02618b192be9",
+    "insta_sort": "most-recent",
+    "blog_meta_yes": true,
+    "blog_meta_title": "Meta",
+    "blog_meta_list": "<li><a href=\"#\">Log in<\/a><\/li><li><a href=\"#\">Entries RSS<\/a><\/li><li><a href=\"#\">Comments RSS<\/a><\/li><li><a href=\"#\">WordPress.org<\/a><\/li>",
+    "blog_archives_yes": true,
+    "blog_archives_title": "Archives",
+    "blog_archives_list": "<li><a href=\"#\">February 2015<\/a><\/li><li><a href=\"#\">April 2016<\/a><\/li><li><a href=\"#\">May 2016<\/a><\/li><li><a href=\"#\">Juny 2016<\/a><\/li>",
+    "blog_tags_yes": true,
+    "blog_popular_posts_yes": true,
+    "blog_popular_posts_title": "Popular Posts",
+    "blog_popular_posts_handles": "",
+    "blog_instagram_yes": true,
+    "blog_follow_us_yes": true,
+    "blog_newsletter_yes": true,
+    "password_page_logo": "",
+    "password_page_bg_yes": false,
+    "password_page_bg": "",
+    "password_page_date": "2018\/12\/31",
+    "show_multiple_currencies": true,
+    "currency_format": "money_with_currency_format",
+    "supported_currencies": "$:USD:United states dollars|€:EUR:Euro|£:GBP:United kingdom pounds|$:CAD:Canadian dollars",
+    "default_currency": "USD",
+    "color_theme": "#339af0",
+    "color_body_text_color": "",
+    "color_body_link_color": "#339af0",
+    "color_body_link_color_hover": "",
+    "color_button_color": "",
+    "color_button_bg": "#ed1b3e",
+    "color_button-hover_color": "",
+    "color_button_hover_bg": "",
+    "color_label_stock_bg": "",
+    "color_label_stock_color": "",
+    "color_label_new_bg": "",
+    "color_label_new_color": "",
+    "color_label_sale_bg": "",
+    "color_label_sale_color": "",
+    "color_label_wishlist_bg": "",
+    "color_label_wishlist_color": "",
+    "color_menu-label-1_bg": "",
+    "color_menu-label-2_bg": "",
+    "color_menu-label-3_bg": "",
+    "color_menu-label-4_bg": "",
+    "color_menu-label_color": "",
+    "color_shopify-payment-button_color": "",
+    "color_shopify-payment-button_bg": "",
+    "color_shopify-payment-button-hover_color": "",
+    "color_shopify-payment-button-hover_bg": "",
+    "dark_color_theme": "",
+    "dark_color_body_text_color": "",
+    "dark_color_body_link_color": "",
+    "dark_color_body_link_color_hover": "",
+    "dark_color_button_color": "",
+    "dark_color_button_bg": "",
+    "dark_color_button-hover_color": "",
+    "dark_color_button_hover_bg": "",
+    "dark_color_label_stock_bg": "",
+    "dark_color_label_stock_color": "",
+    "dark_color_label_new_bg": "",
+    "dark_color_label_new_color": "",
+    "dark_color_label_sale_bg": "",
+    "dark_color_label_sale_color": "",
+    "dark_color_label_wishlist_bg": "",
+    "dark_color_label_wishlist_color": "",
+    "dark_color_menu-label-1_bg": "",
+    "dark_color_menu-label-2_bg": "",
+    "dark_color_menu-label-3_bg": "",
+    "dark_color_menu-label-4_bg": "",
+    "dark_color_menu-label_color": "",
+    "dark_color_shopify-payment-button_color": "",
+    "dark_color_shopify-payment-button_bg": "",
+    "dark_color_shopify-payment-button-hover_color": "",
+    "dark_color_shopify-payment-button-hover_bg": "",
+    "color_body_font_family": "",
+    "color_headings_font_family": "",
+    "color_product_page_name_font_family": "",
+    "color_topnav_level_1_font_family": "",
+    "color_desktop_menu_font_size": "",
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "style": "4",
+          "style_mobile": "2",
+          "logo": "",
+          "logo_max_width": "140",
+          "languages": false,
+          "currencies": false,
+          "header_search": false,
+          "search_keywords": "Jeans,Sunglazsses,hand bags,Discount,St.Valentine’s gift,maxi dress,Underwear,new in clothing,men tops",
+          "login_box": false,
+          "delivery": "<span>FREE<\/span> STANDARD DELIVERY ON ORDERS OVER $ 150",
+          "phone_1": "<i class=\"icon icon-mobile\"><\/i><b>8 800 265 89 56<\/b>",
+          "phones": "8 800 265 89 56<br> 8 800 265 89 56",
+          "sticky": true,
+          "html_header_5": "",
+          "topline_enable": true,
+          "topline_caption": "VALENTINES DAY SALE - 50% OFF",
+          "topline_expires": "1",
+          "default_navigation": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "outer_margin": "mt-10",
+          "style": "1",
+          "logo_yes": true,
+          "logo": "",
+          "logo_max_width": "140",
+          "navigation_1": "main-menu",
+          "navigation_2": "main-menu",
+          "navigation_3": "main-menu",
+          "navigation_4_yes": false,
+          "navigation_4": "",
+          "navigation_5": "",
+          "navigation_6": "",
+          "shop_info_yes": true,
+          "newsletter": true,
+          "show_methods_of_payment": true,
+          "show_instagram": true,
+          "social_icons": true,
+          "support_time_title": "CONNECT WITH US",
+          "support_time": "<ul class=\"contact-list\"> <li>\n<i class=\"icon-phone\"><\/i><span><span class=\"h6-style\">Call Us:<\/span><span>1 (800) 233-2742<\/span><\/span>\n<\/li> <li>\n<i class=\"icon-phone\"><\/i><span><span class=\"h6-style\">Hours:<\/span><span>Mon-fri 9am-8pm<br>sat 9am-6pm<\/span><\/span>\n<\/li> <li>\n<i class=\"icon-mail-envelope\"><\/i><span><span class=\"h6-style\">E-mail:<\/span><span><a href=\"mailto:info@goodwin.us\">info@goodwin.us<\/a><\/span><\/span>\n<\/li> <li>\n<i class=\"icon-phone\"><\/i><span><span class=\"h6-style\">Address:<\/span><span>goodwin store 140 new str., suite 21 brooklyn, NY<\/span><\/span>\n<\/li> <\/ul>",
+          "short_description": "Lorem ipsum dolor sit amet consestuer adicpising elitr anno dolor sit amet. Lorem ipsum dolor sit amet consestuer adicpising.",
+          "google_map": "<iframe src=\"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d1798.3693703617603!2d-74.01304569028459!3d40.70734488791827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a17292434ef%3A0x13cceefedbab92d0!2z0KPQvtC70Lsg0YHRgtGA0LjRgg!5e0!3m2!1sru!2sua!4v1531821064393\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen=\"\"><\/iframe>",
+          "chat_yes": false,
+          "chat_link": "#chat",
+          "copyright": "<p class=\"footer-copyright-text\"><span>© Copyright<\/span> 2019 <a href=\"#\">iLovePaws<\/a>. <span>All rights reserved.<\/span><\/p><p class=\"footer-copyright-links\"><a href=\"\">Terms & conditions<\/a> <a href=\"#\">Privacy policy<\/a><\/p>"
+        }
+      },
+      "collection-sidebar": {
+        "type": "collection-sidebar",
+        "blocks": {
+          "1511706668593": {
+            "type": "group",
+            "settings": {
+              "enable": false,
+              "title": "Colors",
+              "tags": "pink, red, orange, gray, blue, white, purple, black, green, gold, pink",
+              "style": "color-list"
+            }
+          },
+          "1535208640521": {
+            "type": "group",
+            "settings": {
+              "enable": true,
+              "title": "Gender",
+              "tags": "women, men",
+              "style": "category-list"
+            }
+          },
+          "1511706898471": {
+            "type": "group",
+            "settings": {
+              "enable": true,
+              "title": "Vendor",
+              "tags": "apple, samsung, brand, leica, jbl, sony, adidas, nike, reebok, almod, bone, keto, whey, omega, diesel, sport, tissot",
+              "style": "category-list"
+            }
+          },
+          "1511706917060": {
+            "type": "group",
+            "settings": {
+              "enable": true,
+              "title": "Price",
+              "tags": "below 100, 100-200, above 200",
+              "style": "category-list"
+            }
+          },
+          "1511706934183": {
+            "type": "group",
+            "settings": {
+              "enable": true,
+              "title": "Size",
+              "tags": "xs, s, m, l, xl, xxl, xxxl, 7,8,9,10,11,12, 1kg, 2kg, 3kg, 4kg",
+              "style": "size-list"
+            }
+          },
+          "1511706955678": {
+            "type": "group",
+            "settings": {
+              "enable": true,
+              "title": "Popular Tags",
+              "tags": "100-200, gray, Nike, Dior, marine, white, xs, blue, s, yellow, Seiko, above-200",
+              "style": "tags-list"
+            }
+          }
+        },
+        "block_order": [
+          "1511706668593",
+          "1535208640521",
+          "1511706898471",
+          "1511706917060",
+          "1511706934183",
+          "1511706955678"
+        ],
+        "settings": {
+          "shopping_by": true
+        }
+      },
+      "product-section": {
+        "type": "product-section",
+        "blocks": {
+          "1527845510792": {
+            "type": "tab_description",
+            "settings": {
+              "enable": true,
+              "title": "Description"
+            }
+          },
+          "1527845518340": {
+            "type": "tab_tags",
+            "settings": {
+              "enable": true,
+              "title": "Assigned tags"
+            }
+          },
+          "1527845527390": {
+            "type": "tab_reviews",
+            "settings": {
+              "enable": true,
+              "title": "Reviews",
+              "reviews": false
+            }
+          }
+        },
+        "block_order": [
+          "1527845510792",
+          "1527845518340",
+          "1527845527390"
+        ],
+        "settings": {
+          "zoom": true,
+          "product_prev_next": true,
+          "vendor": false,
+          "product_sku": true,
+          "show_label_new": true,
+          "show_label_sale": true,
+          "product_rating": true,
+          "product_availability": true,
+          "product_inventory_count": false,
+          "right_column_yes": true,
+          "description": "<a href=\"#\" class=\"shop-feature\"> <div class=\"shop-feature-icon\"><i class=\"icon-box3\"><\/i><\/div> <div class=\"shop-feature-text\"> <div class=\"text1\">Free worlwide delivery<\/div> <div class=\"text2\">Lorem ipsum dolor sit amet conset <\/div> <\/div> <\/a> <a href=\"#\" class=\"shop-feature\"> <div class=\"shop-feature-icon\"><i class=\"icon-arrow-left-circle\"><\/i><\/div> <div class=\"shop-feature-text\"> <div class=\"text1\">100% money back guarantee<\/div> <div class=\"text2\">Lorem ipsum dolor sit amet conset <\/div> <\/div> <\/a> <a href=\"#\" class=\"shop-feature\"> <div class=\"shop-feature-icon\"><i class=\"icon-call\"><\/i><\/div> <div class=\"shop-feature-text\"> <div class=\"text1\">24\/7 customer support<\/div> <div class=\"text2\">Lorem ipsum dolor sit amet conset <\/div> <\/div> <\/a>",
+          "description_2": "<div class=\"col-sm-4\">\n<a href=\"#\" class=\"shop-feature text-center\"> <div class=\"shop-feature-icon\"><i class=\"icon-gift2\"><\/i><\/div> <div class=\"shop-feature-text\"> <div class=\"text1\">Free worlwide delivery<\/div> <\/div> <\/a> <\/div> <div class=\"col-sm-4\"> <a href=\"#\" class=\"shop-feature text-center\"> <div class=\"shop-feature-icon\"><i class=\"icon-circle-dollar\"><\/i><\/div> <div class=\"shop-feature-text\"> <div class=\"text1\">100% money back guarantee<\/div> <\/div> <\/a> <\/div> <div class=\"col-sm-4\"> <a href=\"#\" class=\"shop-feature text-center\"> <div class=\"shop-feature-icon\"><i class=\"icon-tag\"><\/i><\/div> <div class=\"shop-feature-text\"> <div class=\"text1\">24\/7 customer support<\/div> <\/div> <\/a> <\/div>",
+          "size_guide": "",
+          "dynamic_buy_now": true,
+          "safe_checkout_image_yes": true,
+          "safe_checkout_image": "",
+          "product_related_enable": true,
+          "title": "More from this collection",
+          "limit": "7",
+          "per_row_desktop": "4"
+        }
+      },
+      "1547968905387": {
+        "type": "banner_from_online_editor",
+        "settings": {
+          "enable": true,
+          "title": "Banners From Online Editor",
+          "html": "<div class=\"holder fullboxed slideshow mt-0 py-2 py-md-3\">\n<div class=\"container\">\n\n<div class=\"row\">\n\n<div class=\"col-12 col-sm-5 order-2 order-sm-1 mb-2 mb-sm-0\">\n<div class=\"left\" style=\"width:70%;margin:0 auto;\">\n<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/files\/banner-canvas.png\" style=\"max-width:70%;\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/files\/banner-shirts.png\" style=\"max-width:70%;\">\n<\/div>\n<\/div>\n<script type=\"text\/javascript\">\n$(document).ready(function(){\n  $('.left').slick({\n    dots: false,\n    arrows: true,\n    autoplay: true,\n    fade: true,\n    autoplaySpeed: 1000\n  });\n});\n<\/script>\n\n<div class=\"col-12 col-sm-7 order-1 order-sm-2\">\n\n<h1>\n<span>Custom<\/span>\n<span>Art <small>of<\/small> Your Pet<\/span>\n<\/h1>\n<h2>Pet Portraits | Dog Portraits | Cat Portraits<\/h2>\n<div class=\"d-none d-sm-block text-center\">\n<a class=\"btn btn-lg btn-primary\" href=\"#\">Shop Now<\/a>\n<\/div>\n<\/div>\n\n<div class=\"col-12 order-3 d-sm-none text-center\"><a class=\"btn btn-lg btn-primary\" href=\"#\">Shop Now<\/a><\/div>\n\n<\/div>\n\n<\/div>\n<\/div>"
+        }
+      },
+      "gallery-page-section": {
+        "type": "gallery-page-section",
+        "blocks": {
+          "1548317098882": {
+            "type": "Photo",
+            "settings": {
+              "enable": true,
+              "title": "",
+              "image": "shopify:\/\/shop_images\/Order-11815-3x.jpg",
+              "image_hover": "shopify:\/\/shop_images\/Order-11815.png",
+              "image_hover_2": "shopify:\/\/shop_images\/coming-soon.png",
+              "tags": "category-1"
+            }
+          },
+          "1548317121013": {
+            "type": "Photo",
+            "settings": {
+              "enable": true,
+              "title": "",
+              "image": "shopify:\/\/shop_images\/Order-11815-3x.jpg",
+              "image_hover": "shopify:\/\/shop_images\/Order-11815.png",
+              "image_hover_2": "shopify:\/\/shop_images\/coming-soon.png",
+              "tags": "category-1"
+            }
+          },
+          "1548317139664": {
+            "type": "Photo",
+            "settings": {
+              "enable": true,
+              "title": "",
+              "image": "shopify:\/\/shop_images\/Order-11815-3x.jpg",
+              "image_hover": "shopify:\/\/shop_images\/Order-11815.png",
+              "image_hover_2": "shopify:\/\/shop_images\/coming-soon.png",
+              "tags": "category-1"
+            }
+          }
+        },
+        "block_order": [
+          "1548317098882",
+          "1548317121013",
+          "1548317139664"
+        ],
+        "settings": {
+          "subtitle_notouch": "Hover image",
+          "subtitle_touch": "Click image",
+          "gallery_filters": true,
+          "delay": "5",
+          "per_row_desctop": "3",
+          "per_row_tablet": "2",
+          "per_row_mobile": "2"
+        }
+      },
+      "1548476439127": {
+        "type": "banner_from_online_editor",
+        "settings": {
+          "enable": true,
+          "title": "Banners From Online Editor",
+          "html": "<div class=\"container review-stars py-3 py-sm-4 text-center\">\n<h2 class=\"mb-0\">Our customers give us <a class=\"d-block d-sm-inline-block\" href=\"\/pages\/reviews\"><svg class=\"icon-star-solid\"><use xlink:href=\"#icon-star-solid\"><\/use><\/svg><svg class=\"icon-star-solid\"><use xlink:href=\"#icon-star-solid\"><\/use><\/svg><svg class=\"icon-star-solid\"><use xlink:href=\"#icon-star-solid\"><\/use><\/svg><svg class=\"icon-star-solid\"><use xlink:href=\"#icon-star-solid\"><\/use><\/svg><svg class=\"icon-star-solid\"><use xlink:href=\"#icon-star-solid\"><\/use><\/svg><\/a>\n<span>Based on 1,000+ reviews<\/span>\n<\/h2>\n<\/div>"
+        }
+      },
+      "1548546751105": {
+        "type": "banner_from_online_editor",
+        "settings": {
+          "enable": true,
+          "title": "Banners From Online Editor",
+          "html": "<div class=\"container value-points pt-2 pb-3 pb-md-4 text-center\">\n<div class=\"row\">\n<div class=\"col-12 col-sm-6 col-md-3\">\n<img class=\"d-block w-60 mx-auto mb-1\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/preview.png\" srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/turnaround.png, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/turnaround-2x.png 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/turnaround-3x.png 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/turnaround-4x.png 4x\"><h3 class=\"mb-1\">Quick Turnaround<\/h3>\n<p class=\"m-0 mb-5\">Artwork is typically completed in 3-4 business days by our in-house artists.<\/p>\n<\/div>\n<div class=\"col-12 col-sm-6 col-md-3\">\n<img class=\"d-block w-60 mx-auto mb-1\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/preview.png\" srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/preview.png, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/preview-2x.png 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/preview-3x.png 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/preview-4x.png 4x\"><h3 class=\"mb-1\">Artwork Preview<\/h3>\n<p class=\"m-0 mb-5\">Receive an artwork preview and mockup of the final product.<\/p>\n<\/div>\n<div class=\"col-12 col-sm-6 col-md-3\">\n<img class=\"d-block w-60 mx-auto mb-1\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/color.png\" srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/color.png, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/color-2x.png 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/color-3x.png 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/color-4x.png 4x\"><h3 class=\"mb-1\">Color Options<\/h3>\n<p class=\"m-0 mb-5\">Use our interactive tool to select the perfect background\/product color.<\/p>\n<\/div>\n<div class=\"col-12 col-sm-6 col-md-3\">\n<img class=\"d-block w-60 mx-auto mb-1\" src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/unltd.png\" srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/unltd.png, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/unltd-2x.png 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/unltd-3x.png 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/unltd-4x.png 4x\"><h3 class=\"mb-1\">Unlimited Revisions<\/h3>\n<p class=\"m-0 mb-5\">Only approve the artwork when you're 100% satisfied.<\/p>\n<\/div>\n<\/div>\n<div class=\"row\">\n<div class=\"col\">\n<a class=\"btn btn-lg btn-primary\" href=\"#\">Shop Now<\/a>\n<\/div>\n<\/div>\n<\/div>"
+        }
+      },
+      "1548551919235": {
+        "type": "banner_from_online_editor",
+        "settings": {
+          "enable": true,
+          "title": "Banners From Online Editor",
+          "html": "<div class=\"holder fullwidth mt-0 py-3 py-md-4\" style=\"background:#eeeeee\">\n<h2 style=\"letter-spacing:0;text-transform:none;font-size:24px;\" class=\"mb-3 mb-md-4 text-center\">Everyone Loves Our Art<\/h2>\n<div class=\"mb-3 mb-md-4 gallery\">\n<img class=\"mx-1 lazyload\" data-src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11815_1x.jpg\" data-srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11815_1x.jpg 1x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11815_2x.jpg 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11815_3x.jpg 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11815_4x.jpg 4x\" style=\"max-width:70%;\">\n<img class=\"mx-1 lazyload\" data-src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11662_1x.jpg\" data-srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11662_1x.jpg 1x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11662_2x.jpg 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11662_3x.jpg 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11662_4x.jpg 4x\" style=\"max-width:70%;\">\n<img class=\"mx-1 lazyload\" data-src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11973_1x.jpg\" data-srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11973_1x.jpg 1x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11973_2x.jpg 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11973_3x.jpg 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11973_4x.jpg 4x\" style=\"max-width:70%;\">\n<img class=\"mx-1 lazyload\" data-src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11666_1x.jpg\" data-srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11666_1x.jpg 1x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11666_2x.jpg 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11666_3x.jpg 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11666_4x.jpg 4x\" style=\"max-width:70%;\">\n<img class=\"mx-1 lazyload\" data-src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11847_1x.jpg\" data-srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11847_1x.jpg 1x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11847_2x.jpg 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11847_3x.jpg 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11847_4x.jpg 4x\" style=\"max-width:70%;\">\n<img class=\"mx-1 lazyload\" data-src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11924_1x.jpg\" data-srcset=\"https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11924_1x.jpg 1x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11924_2x.jpg 2x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11924_3x.jpg 3x, https:\/\/cdn.shopify.com\/s\/files\/1\/1543\/9345\/t\/43\/assets\/artwork-gallery-cartoon-style-11924_4x.jpg 4x\" style=\"max-width:70%;\">\n<\/div>\n<div class=\"text-center\">\n<a class=\"btn-decor\" href=\"#\">View Gallery<\/a>\n<\/div>\n<\/div>\n<script type=\"text\/javascript\">\n$(document).ready(function(){\n  $('.gallery').slick({\n    arrows: false,\n    centerMode: true,\n    slidesToShow: 5,\n    autoplay: true,\n    autoplaySpeed: 1000,\n    responsive: [\n{\n      breakpoint: 992,\n      settings: {\n        slidesToShow: 4\n      }\n    },\n{\n      breakpoint: 768,\n      settings: {\n        slidesToShow: 2\n      }\n    },\n{\n      breakpoint: 480,\n      settings: {\n        slidesToShow: 1\n      }\n    }\n]\n  });\n});\n<\/script>"
+        }
+      },
+      "1548644452865": {
+        "type": "banner_from_online_editor",
+        "settings": {
+          "enable": true,
+          "title": "Banners From Online Editor",
+          "html": "<div class=\"holder fullboxed mt-0 py-3 py-md-4\" style=\"background-color:#339af0;color:#fff;\">\n<div class=\"container\">\n<div class=\"row\">\n\n<div class=\"col-12 col-md-4 mb-3 mb-md-0 text-center\">\n<div style=\"font-size:20px;line-height:30px;\">\n<span class=\"d-block\" style=\"font-size:40px;line-height:50px;font-weight:600;\">15,000 + <\/span>Artworks Completed<\/div>\n<\/div>\n\n<div class=\"col-12 col-md-4 mb-3 mb-md-0 text-center\">\n<div style=\"font-size:20px;line-height:30px;\">\n<span class=\"d-block\" style=\"font-size:40px;line-height:50px;font-weight:600;\">12,000 + <\/span>Happy Customers<\/div>\n<\/div>\n\n<div class=\"col-12 col-md-4 text-center\">\n<div style=\"font-size:20px;line-height:30px;\">\n<span class=\"d-block\" style=\"font-size:40px;line-height:50px;font-weight:600;\">20 + <\/span>Countries<\/div>\n<\/div>\n<\/div>\n<\/div>\n<\/div>"
+        }
+      },
+      "1548924668956": {
+        "type": "products-grid",
+        "settings": {
+          "outer_margin": "mt-0",
+          "title": "Top Products",
+          "collection": "top-products",
+          "limit": "4",
+          "show_view_all": false
+        }
+      },
+      "1548925326978": {
+        "type": "instagram",
+        "settings": {
+          "outer_margin": "mt-0",
+          "heading": "#iLovePaws on <i class=\"fab fa-instagram\"><\/i> IG",
+          "insta_token": "4025997193.1677ed0.cc92bbaea57a4d40a483cfa4b05aea5a",
+          "insta_limit": "12",
+          "insta_sort": "most-recent",
+          "link_button_yes": false,
+          "link_button_text": "shop the lookbook",
+          "link": "",
+          "link_target": "_blank"
+        }
+      },
+      "faq": {
+        "type": "faq",
+        "blocks": {
+          "1549753411433": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "How is the artwork created?",
+              "category": "Artwork & Photos",
+              "answer": "All of the artwork is digitally drawn by our talented and highly-trained in-house artists."
+            }
+          },
+          "1549753661288": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "What is express artwork?",
+              "category": "Artwork & Photos",
+              "answer": "Upgrading to our express service means you will receive the artwork preview in 1 business day.<br><i>Please note that this does not include express shipping.<\/i>"
+            }
+          },
+          "1549752878179": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "How can I check the status of my order?",
+              "category": "Orders",
+              "answer": "Please <a href=\"#\">click here<\/a> to check the status of your order. You will need your order number and email address used upon placing your order."
+            }
+          },
+          "1549752451581": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "How long does production take?",
+              "category": "Production",
+              "answer": "Production time varies based on the product, but typically takes around 2-4 business days."
+            }
+          },
+          "1549752697163": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "Can I expedite the production process?",
+              "category": "Production",
+              "answer": "While we do offer expedited artwork and shipping we cannot speed up the production process."
+            }
+          },
+          "1549754463183": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "When will my order be shipped?",
+              "category": "Shipping & Delivery",
+              "answer": "Your order is shipped as soon as production (2-4 business days) is complete. An email notification will be sent to you which includes the tracking information."
+            }
+          },
+          "1549754631619": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "Which shipping carriers do you use?",
+              "category": "Shipping & Delivery",
+              "answer": "We use all of the major carriers which include UPS, USPS, FedEx, and DHL."
+            }
+          },
+          "1549754718383": {
+            "type": "item",
+            "settings": {
+              "enable": true,
+              "title": "Why is the tracking number not showing any information?",
+              "category": "Shipping & Delivery",
+              "answer": "Even though your item has been shipped and you received a tracking number, it can take up to 48 hours for the information to be updated on the carriers end."
+            }
+          }
+        },
+        "block_order": [
+          "1549753411433",
+          "1549753661288",
+          "1549752878179",
+          "1549752451581",
+          "1549752697163",
+          "1549754463183",
+          "1549754631619",
+          "1549754718383"
+        ],
+        "settings": {
+          "categories": "General,Artwork & Photos,Products,Orders,Production,Shipping & Delivery,Terms & Policies"
+        }
+      },
+      "contact-us-section": {
+        "type": "contact-us-section",
+        "settings": {
+          "title_1": "Contact us any time for any questions",
+          "info_1_i": "icon-mobile",
+          "info_1_l": "CALL US",
+          "info_1_r": "1 (800) 233-2742",
+          "info_2_i": "icon-clock",
+          "info_2_l": "HOURS",
+          "info_2_r": "MON-FRI 9AM-8PM SAT 9AM-6PM",
+          "info_3_i": "icon-mail",
+          "info_3_l": "ADDRESS",
+          "info_3_r": "GOODWIN STORE 140 NEW STR., SUITE 21 BROOKLYN, NY",
+          "info_4_i": "icon-location",
+          "info_4_l": "CALL US",
+          "info_4_r": "1 (800) 233-2742",
+          "title_2": "SIGN IN",
+          "iframe": ""
+        }
+      }
+    },
+    "content_for_index": [
+      "1547968905387",
+      "1548476439127",
+      "1548546751105",
+      "1548551919235",
+      "1548644452865",
+      "1548924668956",
+      "1548925326978"
+    ]
+  }
+}

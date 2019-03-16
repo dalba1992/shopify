@@ -1,0 +1,112 @@
+<div class="hdr-wrap bg-bottom bg-cover" style="background-image: url({{ 'header-tshirts-bg.jpg' | asset_url }}); background-color: #232323;">
+    <header class="hdr global_width hdr-style-2 hdr--dark hdr--dark-drop {% if section.settings.sticky %}hdr_sticky{% endif %} minicart-icon-style-2 hdr-mobile-style{{ section.settings.style_mobile }}">
+        {% include 'topline' %}
+        {% include 'mobile-navigation' %}
+        {% include 'header-mobile' %}
+        <div class="hdr-desktop hide-mobile">
+            <div class="hdr-content">
+                <div class="container">
+                    <div class="hdr-content-left">
+                        {% include 'header-languages-currencies' classes:'only-icon' %}
+                    </div>
+                    <div class="logo-holder">
+                        {% include 'header-logo' %}
+                    </div>
+                    <div class="hdr-content-right">
+                        <div class="links-holder">
+                            {% include 'header-search'  classes:"only-icon" %}
+                            {% include 'header-login-form'  classes: "only-icon" %}
+                        </div>
+                        <div class="minicart-holder">
+                            {% include 'header-cart' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-holder">
+                <div class="hdr-nav">
+                    <div class="container">
+                        {% include 'header-navigation' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'header-sticky' %}
+    </header>
+    <div class="header-banners">
+        <div class="container">{% if home or template == 'page.home-page-t-shirts-1' %}{{ section.settings.html_header_5 }}{% endif %}
+            </div></div>
+</div>
+
+<div class="side-fixed">
+    <div class="left-fixed">
+        <div><img src="{{ 'left-img-1.png' | asset_url }}" alt=""></div>
+        <div><img src="{{ 'left-img-2.png' | asset_url }}" alt=""></div>
+    </div>
+    <div class="right-fixed">
+        <div><img src="{{ 'right-img-1.png' | asset_url }}" alt=""></div>
+        <div><img src="{{ 'right-img-2.png' | asset_url }}" alt=""></div>
+    </div>
+</div>
+{% unless demo %}
+<style>
+  /*T SHIRTS*/
+  /*header*/
+  body.theme-dark .hdr-wrap {
+      background-image: url({{ 'header-tshirts-bg-dark.jpg' | asset_url }}) !important;
+  }
+  @media screen and (min-width: 992px){
+      body.theme-dark .hdr-wrap {
+          min-height: 0;
+      }
+  }
+
+  /*footer*/
+  body.home-page .page-content .shopify-section:last-of-type > .holder:last-of-type {
+      padding-top: 160px;
+      padding-bottom: 160px;
+      background-position: center top;
+      background-size: cover;
+      background-image: url({{ 'bg-tshirts-carousel.jpg' | asset_url }}) !important; }
+
+  body.home-page .page-content .shopify-section:last-of-type > .holder + .holder:last-of-type {
+      margin-top: -80px !important; }
+
+  .page-content .shopify-section:last-of-type > .holder:last-of-type {
+      padding-bottom: 200px; }
+
+  @media screen and (max-width: 1199px) {
+      .page-content .shopify-section:last-of-type > .holder:last-of-type {
+          padding-bottom: 160px; }
+      body.home-page .page-content .shopify-section:last-of-type > .holder:last-of-type {
+          padding-bottom: 140px; } }
+
+  @media screen and (max-width: 991px) {
+      .page-content .shopify-section:last-of-type > .holder:last-of-type {
+          padding-bottom: 140px; }
+      body.home-page .page-content .shopify-section:last-of-type > .holder:last-of-type {
+          padding-bottom: 120px; } }
+
+  .page-content > .container {
+      padding-bottom: 200px; }
+
+  @media screen and (min-width: 992px) {
+      .page-content > .container {
+          padding-bottom: 140px; }
+      .holder-bg-carousel {
+          min-height: 500px; } }
+
+  body.home-page.theme-dark .page-content .shopify-section:last-of-type > .holder:last-of-type {
+      padding-top: 65px;
+      background-color: transparent;
+      background-image: none !important; }
+
+  @media screen and (min-width: 992px) {
+      body.home-page.theme-dark .page-content .shopify-section:last-of-type > .holder:last-of-type {
+          padding-top: 50px; } }
+
+  @media screen and (min-width: 767px) {
+      body.home-page.theme-dark .page-content .shopify-section:last-of-type > .holder:last-of-type {
+          padding-top: 40px; } }
+</style>
+{% endunless %}

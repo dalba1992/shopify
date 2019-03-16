@@ -1,0 +1,28 @@
+{% assign featured_image = product.featured_image %}
+<div class="prd-block_gallery">
+    <div class="prd-block_gallery-single">
+        <a href="{{ featured_image.src | img_url: 'master' }}" class="prd-has-loader" data-name="{{ featured_image.src | split:'products/' | last | split:'.' | first }}" data-fancybox="gallery" data-caption="{{ featured_image.alt | escape }}">
+          <img src="{{ featured_image.src | img_url: '710x', scale:1.5  }}" alt="{{ featured_image.alt | escape }}" />
+          <div class="gdw-loader"></div>
+      	</a>
+    </div>
+    {% if product.images.size > 1 %}
+        <div class="prd-block_gallery-grid">
+            {% for image in product.images %}
+                {% unless forloop.first %}
+                    {% if image.alt contains 'video:' %}
+                        <video id='video' controls="controls" preload='none' poster="{{ image.src | img_url: '360x' }}">
+                            <source src="{{ image.alt | replace:'video:' }}" type='video/mp4'/>
+                            <p>Your user agent does not support the HTML5 Video element.</p>
+                        </video>
+                    {% else %}
+                        <a href="{{ image.src | img_url: 'master' }}" class="prd-has-loader" data-name="{{ image.src | split:'products/' | last | split:'.' | first }}" data-fancybox="gallery" data-caption="{{ featured_image.alt | escape }}">
+                          <img src="{{ image.src | img_url: '360x' }}" alt="{{ featured_image.alt | escape }}">
+                          <div class="gdw-loader"></div>
+          				</a>
+                    {% endif %}
+                {% endunless %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

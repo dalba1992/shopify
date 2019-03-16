@@ -1,0 +1,125 @@
+{% if cart.item_count > 0 %}
+<div class="holder mt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col page-title">
+    <h1>{{ 'general.theme.shopping_cart' | t }}</h1>
+      </div>
+    </div>
+    <form action="/cart" method="post" novalidate class="cart white">
+      <div class="row">
+      <div class="col-md-7 col-lg-8">
+        {% for item in cart.items %}
+        <div class="row align-items-lg-center py-3">
+          <div class="col-3 col-sm-2 col-lg-2 cart-table-prd-image">
+            <a href="{{ item.url | within: collections.all }}" ><img src="{{ item | img_url: 'medium' }}" width="100%" alt="{{ item.title | escape }}"></a>
+          </div>
+          <div class="col-7 col-sm-8 col-lg-9 px-0">
+            <div class="row align-items-center">
+          <div class="col-12 col-lg-6 cart-table-prd-name">
+            <div class="font-weight-bold text-truncate"><a href="{{ item.url }}" title="{{ item.title }}">{{ item.product.title }}</a></div>
+            {% unless item.variant.title contains 'Title' %}<div>{{ item.variant.title }}</div>{% endunless %}
+
+            <script>
+                          $(function () {
+                            $('[data-toggle="popover"]').on('click',function(e){
+                              e.preventDefault();
+                            }).popover()
+                          })
+                        </script>
+                        <a href="#" class="options-dropdown" tabindex="0" data-toggle="popover" data-trigger="focus" data-html="true" data-boundary="viewport" data-placement="bottom" data-content="
+                          <div class='options_title'>
+                              {% assign propertySize = item.properties | size %}
+                              {% if propertySize > 0 %}
+                                  {% for p in item.properties %}
+                                  <div>{% assign first_character_in_key = p.first | truncate: 1, '' %}
+                                      {% unless p.last == blank or first_character_in_key == '_' %}
+                                      {{ p.first }}:
+                                      {% if p.last contains 'https://' %}
+                                          <span><a href='{{ p.last }}' target='_blank'>Uploaded</a></span>
+                                      {% else %}
+                                    <span>{{ p.last }}</span><br/>
+                                      {% endif %}
+
+                                      {% endunless %}
+                                  </div>
+                                  {% endfor %}
+                              {% endif %}
+                          </div>" >Options <svg class="icon-angle-down" style="font-size:14px;"><use xlink:href="#icon-angle-down"></use></svg>
+                        </a>
+
+          </div>
+          <div class="col-6 col-lg-2 cart-table-prd-qty">Qty: {{ item.quantity }}</div>
+          <div class="col-6 col-lg-2 cart-table-prd-price">{{ item.price | money }}</div>
+          </div>
+      </div>
+          
+          
+          <div class="col-2 col-lg-1 pt-3">
+          <div class="cart-table-prd-action">
+            <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" data-variant-id="{{ item.variant_id }}" data-line-number="{{ forloop.index }}"  title="{{ 'cart.general.remove' | t }}"><svg class="icon-trash"><use xlink:href="#icon-trash"></use></svg></a>
+          </div>
+          </div>
+        </div>
+        {% endfor %}
+     
+      </div>
+      <div class="col-sm-8 col-md-5 col-lg-4 mx-auto py-3">
+                <div class="row py-3" style="background:#fafafa;border:1px solid #ddd;border-radius:0.25rem;">
+                <div class="col-12 text-center">
+                  <h4>Cart Summary</h4>
+                  </div>
+                <div class="col-12 mt-3">
+                  <div class="row">
+                      <div class="col-auto mr-auto mb-2">
+                         Subtotal ({{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }}):
+                      </div>
+                      <div class="col-auto mb-2 product-price-bold-total">
+                          <b>{{ cart.total_price | money }}</b>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-primary btn-lg btn-block font-26" type="submit" name="checkout">{{ 'general.theme.go_to_checkout' | t }}</button>
+                    </div>
+               	 </div>
+              	</div>
+                  <div class="col-12 mt-3 secure-checkout">
+                    <div class="secure-title"><svg class="icon-lock-solid mr-1"><use xlink:href="#icon-lock-solid"></use></svg><span>100% Secure Checkout</span></div>
+                  <div class="secure-icons text-center"><svg class="icon-secure-mcafee mr-2"><use xlink:href="#icon-secure-mcafee"></use></svg>
+                    <svg class="icon-secure-norton"><use xlink:href="#icon-secure-norton"></use></svg></div>
+                </div>
+                <div class="col-12 d-flex mt-3 payment-icons">
+                <svg class="icon-payment-visa"><use xlink:href="#icon-payment-visa"></use></svg>
+                <svg class="icon-payment-mastercard"><use xlink:href="#icon-payment-mastercard"></use></svg>
+                <svg class="icon-payment-discover"><use xlink:href="#icon-payment-discover"></use></svg>
+                <svg class="icon-payment-amex"><use xlink:href="#icon-payment-amex"></use></svg>
+                <svg class="icon-payment-paypal"><use xlink:href="#icon-payment-paypal"></use></svg>
+                <svg class="icon-payment-amazon-pay"><use xlink:href="#icon-payment-amazon-pay"></use></svg>
+                <svg class="icon-payment-apple-pay"><use xlink:href="#icon-payment-apple-pay"></use></svg>
+                <svg class="icon-payment-google-pay"><use xlink:href="#icon-payment-google-pay"></use></svg>
+                </div>
+                  </div>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% else %}
+<div class="holder mt-0">
+  <div class="container">
+  <div class="empty-category">
+    <div class="empty-category-text"><span>{{ 'general.theme.sorry' | t }}</span>, {{ 'general.theme.empty_cart_1' | t }}</div>
+    <div class="empty-category-button clear-all"><a href="/collections/all"  class="btn-decor">{{ 'general.theme.all_products' | t }}</a></div>
+    <div class="empty-category-icon"><i class="icon-sad-face"></i></div>
+  </div>
+  </div>
+  </div>
+{% endif %}
+<script>
+  var preSavedEmail = sessionStorage.getItem('customer_email');
+  if (preSavedEmail) {
+    $('form.cart').attr('action', '/cart?checkout[email]=' + preSavedEmail);
+  }
+ 
+</script>

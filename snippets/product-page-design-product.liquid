@@ -1,0 +1,370 @@
+<div class="holder mt-0">
+    <div class="container">
+        <div class='step-product'>
+            <label for='step-1' id="labelStep1">Start</label>
+            <div class='progress_inner'>
+                <a class="btn-back-big step2" href="#" onclick="event.preventDefault();document.getElementById('labelStep1').click();">
+                    <svg class="icon-angle-left">
+                        <use xlink:href="#icon-angle-left"></use>
+                    </svg>
+                </a>
+                <a class="btn-back-big step3" href="#" onclick="event.preventDefault();document.getElementById('labelStep2').click();">
+                    <svg class="icon-angle-left">
+                        <use xlink:href="#icon-angle-left"></use>
+                    </svg>
+                </a>
+                <a class="btn-back-big step4" href="#" onclick="event.preventDefault();document.getElementById('labelStep3').click();">
+                    <svg class="icon-angle-left">
+                        <use xlink:href="#icon-angle-left"></use>
+                    </svg>
+                </a>
+                <a class="btn-back-big step5" href="#" onclick="event.preventDefault();document.getElementById('labelStep4').click();">
+                    <svg class="icon-angle-left">
+                        <use xlink:href="#icon-angle-left"></use>
+                    </svg>
+                </a>
+                <div class='progress_inner__step'>
+                    <label for='step-2' id="labelStep2">Options
+                    </label>
+                </div>
+                <div class='progress_inner__step'>
+                    <label for='step-3' id="labelStep3">
+                        <span>Style</span>
+                    </label>
+                </div>
+                <div class='progress_inner__step'>
+                    <label for='step-4' id="labelStep4">
+                        <span>Photo</span>
+                    </label>
+                </div>
+                <div class='progress_inner__step'>
+                    <label for='step-5' id="labelStep5">
+                        <span>Extras</span>
+                    </label>
+                </div>
+                <input checked='checked' id='step-1' name='step' type='radio'>
+                <input id='step-2' name='step' type='radio'>
+                <input id='step-3' name='step' type='radio'>
+                <input id='step-4' name='step' type='radio'>
+                <input id='step-5' name='step' type='radio'>
+                <div class='progress_inner__bar'></div>
+                <div class='progress_inner__bar--set'></div>
+                <div class='progress_inner__tabs'>
+                    <div class='tab tab-1'>
+                        <div class="row row-flex prd-block prd-block--creative prd-block--prv-left js-prd-gallery" id="prdGallery100">
+                            <div class="col-md-6 col-lg-7 col-xl-7 aside">
+                                <div class="clearfix">
+                                    {% include 'product-media' product:product %}
+                                </div>
+                                <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div>
+                                <script>
+                                  window.onscroll = function() {scrollFunction()};
+
+                                  function scrollFunction() {
+                                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                                      document.getElementById("stickybutton").style.display = "block";
+                                    } else {
+                                      document.getElementById("stickybutton").style.display = "none";
+                                    }
+                                  }
+                                </script>
+                                <div id="stickybutton" class="btns-wrap" style="position:fixed;bottom:0;display:none;z-index:100;width:100%;background:#fff;padding:20px 15px;box-shadow:0 -3px 4px rgba(0,0,0,0.1);margin-left:-15px;">
+<script>
+        console.log('here')
+
+        // window.onbeforeunload = function () {
+        //     var confirmClose = confirm('Close?');
+        //     return confirmClose;
+        // }
+        if (localStorage.getItem('time')) {
+            dt = new Date(localStorage.getItem('time'));
+        } else {
+            var dt = new Date();
+            var countDownTime = new Date().getMinutes() + 1;
+            dt.setMinutes(countDownTime);
+            localStorage.setItem('time', dt);
+        }
+
+
+
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = dt - now;
+
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (minutes < 10) { minutes = "0" + minutes }
+            if (seconds < 10) { seconds = "0" + seconds }
+            // Output the result in an element with id="demo"
+            document.getElementsByClassName('minutes')[0].innerHTML = minutes
+            document.getElementsByClassName('seconds')[0].innerHTML = seconds
+            document.getElementsByClassName('minutes')[1].innerHTML = minutes
+            document.getElementsByClassName('seconds')[1].innerHTML = seconds
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                localStorage.removeItem('time');
+                document.getElementsByClassName('demo')[0].innerHTML = "Expired - Reload to reserve a new spot";
+                document.getElementsByClassName('demo')[1].innerHTML = "Expired - Reload to reserve a new spot";
+            }
+        }, 1000);
+    </script>
+                  <div class="demo text-center mb-3" style="font-size:4.6vw;">Your art spot is reserved for <span class="minutes" style="background:#333;color:#fff;padding:4px 6px;border-radius:2px;margin-right:4px;font-weight:600;">00</span>:<span class="seconds" style="background:#333;color:#fff;padding:4px 6px;border-radius:2px;margin-left:4px;font-weight:600;">00</span></div>
+                  <a href="#" class="btn btn-primary btn-lg font-30 btn-block btn-jello" onclick="event.preventDefault();document.getElementById('labelStep2').click();">{{ product.metafields.c_f.button }}</a>
+                </div>
+                <div>{{ product.description }}</div>
+                <div id="stamped-main-widget" 
+data-widget-style="standard"
+data-product-id="{{ product.id }}" 
+data-name="{{ product.title | escape }}" 
+data-url="{{ shop.url }}{{ product.url }}" 
+data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" 
+data-description="{{ product.description | escape }}" 
+data-product-sku="{{product.handle}}"> 
+{{ product.metafields.stamped.reviews }} 
+</div>
+              </div>
+              <div class="col-md-6 col-lg-5 col-xl-5 fixed-col fixed aside js-product-fixed-col">
+                <div class="fixed-col_container">
+                  <div class="fstart"></div>
+                  <div class="fixed-wrapper">
+                    <div class="fixed-scroll">
+                      <div class="fixed-col_content">
+                        {% include 'product_prev_next' %}
+                        {% include 'product-page-info-canvas' %}
+                        <div class="btns-wrap">
+                          <div class="demo text-center mb-3" style="font-size:4.6vw;">Your art spot is reserved for <span class="minutes" style="background:#333;color:#fff;padding:4px 6px;border-radius:2px;margin-right:4px;font-weight:600;">00</span>:<span class="seconds" style="background:#333;color:#fff;padding:4px 6px;border-radius:2px;margin-left:4px;font-weight:600;">00</span></div>
+                          <a href="#" class="btn btn-primary btn-lg font-30 btn-block btn-jello" onclick="event.preventDefault();document.getElementById('labelStep2').click();$('a[data-value=16-x-20]').click();">{{ product.metafields.c_f.button }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fend"></div>
+                </div>
+              </div>
+            </div>
+                            </div>
+                            {% unless settings.catalog_mode %}
+                                <form action="/cart/add" class="atcForm product-info-block-id-{{ product.id }}" enctype="multipart/form-data" method="post">
+                                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                                    <div class="product-options id_{{ product.id }} {{ product_options }} {% if product.variants.size == 1 %}product-no-options no-border{% endif %}">
+                                        {% include 'product-options-draw-pet-clean' design:'default' %}
+                                    </div>
+
+
+                                    <div class='tab tab-4'>
+                                        {% include 'uploadcare-fields' %}
+                                        <span style="display:block;text-align:center;margin-top:10px;">or</span>
+                                        <span style="display:block;text-align:center;margin-top:10px;">
+                                            <a href="#" onclick="event.preventDefault();document.getElementById('labelStep5').click();">Continue</a>
+                                            and Upload Later</span>
+                                        <div class="clearfix"></div><br>
+                                        <div class="btns-wrap">
+                                            <a class="btn btn-back btn-lg" onclick="validate()">
+                                                <svg class="icon-angle-left">
+                                                    <use xlink:href="#icon-angle-left"></use>
+                                                </svg>
+                                            </a>
+                                            <a class="btn btn-primary btn-lg font-24" href="#" onclick="event.preventDefault();document.getElementById('labelStep5').click();">Continue</a>
+                                        </div>
+                                    </div>
+                                    <div class='tab tab-5'>
+                                        {% if product.available %}
+                                            <div class="product-actions">
+                                                {% comment %} Bold:POv2 {% endcomment %}
+                                                <div class="bold_options" data-product-id="{{ product.id }}"></div>
+                                                <div class="clearfix"></div>
+                                                <div class="product-actions-row">
+                                                    <div class="pull-right">
+                                                        {% capture status %}
+                                                            {{ 'general.theme.add_to_cart' | t }}
+                                                        {% endcapture %}
+                                                        {% if product.selected_or_first_available_variant.inventory_management == "shopify" and product.selected_or_first_available_variant.inventory_quantity < 1 and product.selected_or_first_available_variant.inventory_policy == "continue" %}
+                                                            {% capture status %}
+                                                                {{ 'general.theme.pre_order' | t }}
+                                                            {% endcapture %}
+                                                        {% endif %}
+                                                        <div class="btns-wrap mt-0">
+
+                                                            <button type="submit" class="btn" data-variant-id="{{ product.selected_or_first_available_variant.id }}" title="{{ status }}">
+                                                                <svg class="icon-add-to-cart" style="font-size:30px;">
+                                                                    <use xlink:href="#icon-add-to-cart"></use>
+                                                                </svg>
+                                                            </button>
+                                                            {% comment %} Bold:POv2 {% endcomment %}
+                                                            <button class="btn btn-primary btn-lg font-24 btn--animate  js-add-to-cart-product-page-checkout" title="{{ status }}">
+                                                                <span class="text-sent">Processing...</span>
+                                                                <span>Buy Now</span>
+                                                            </button>
+                                                            {% comment %} Bold:POv2 {% endcomment %}
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="secure-checkout mt-4">
+                                                        <div class="secure-title">
+                                                            <svg class="icon-lock-solid mr-1">
+                                                                <use xlink:href="#icon-lock-solid"></use>
+                                                            </svg>
+                                                            <span>100% Secure Checkout</span>
+                                                        </div>
+                                                        <div class="secure-icons mb-3">
+                                                            <svg class="icon-secure-mcafee mr-2">
+                                                                <use xlink:href="#icon-secure-mcafee"></use>
+                                                            </svg>
+                                                            <svg class="icon-secure-norton">
+                                                                <use xlink:href="#icon-secure-norton"></use>
+                                                            </svg>
+                                                        </div>
+                                                        <div class="payment-icons">
+                                                            <div class="mb-2">
+                                                                <svg class="icon-payment-visa">
+                                                                    <use xlink:href="#icon-payment-visa"></use>
+                                                                </svg>
+                                                                <svg class="icon-payment-mastercard">
+                                                                    <use xlink:href="#icon-payment-mastercard"></use>
+                                                                </svg>
+                                                                <svg class="icon-payment-discover">
+                                                                    <use xlink:href="#icon-payment-discover"></use>
+                                                                </svg>
+                                                                <svg class="icon-payment-amex">
+                                                                    <use xlink:href="#icon-payment-amex"></use>
+                                                                </svg>
+                                                                <svg class="icon-payment-paypal">
+                                                                    <use xlink:href="#icon-payment-paypal"></use>
+                                                                </svg>
+                                                                <svg class="icon-payment-amazon-pay">
+                                                                    <use xlink:href="#icon-payment-amazon-pay"></use>
+                                                                </svg>
+                                                                <svg class="icon-payment-apple-pay">
+                                                                    <use xlink:href="#icon-payment-apple-pay"></use>
+                                                                </svg>
+                                                                <svg class="icon-payment-google-pay">
+                                                                    <use xlink:href="#icon-payment-google-pay"></use>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="recart-messenger-widget"></div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </form>
+                                {% endunless %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="ymax"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+  function toTop(){
+    //if ($(window).width() < 992){
+      $('body,html').animate({ scrollTop: 0 }, 500); 
+    //}  	
+  }
+  $.fn.alterClass = function ( removals, additions ) {
+    var self = this;
+    if ( removals.indexOf( '*' ) === -1 ) {
+      self.removeClass( removals );
+      return !additions ? self : self.addClass( additions );
+    }
+    var patt = new RegExp( '\\s' + 
+                          removals.
+                          replace( /\*/g, '[A-Za-z0-9-_]+' ).
+                          split( ' ' ).
+                          join( '\\s|\\s' ) + 
+                          '\\s', 'g' );
+
+    self.each( function ( i, it ) {
+      var cn = ' ' + it.className + ' ';
+      while ( patt.test( cn ) ) {
+        cn = cn.replace( patt, ' ' );
+      }
+      it.className = $.trim( cn );
+    });
+    return !additions ? self : self.addClass( additions );
+  };
+  $('#labelStep1').click();
+  $('body').addClass('product-step1');
+  $('#labelStep1').on('click', function(){
+    $('body').alterClass('product-step*').addClass('product-step1');
+  })
+  $('#labelStep2').on('click', function(){
+    $('body').alterClass('product-step*').addClass('product-step2');
+    toTop();
+  })
+  $('#labelStep3').on('click', function(){
+    $('body').alterClass('product-step*').addClass('product-step3');
+    toTop();
+  })
+  $('#labelStep4').on('click', function(){
+    $('body').alterClass('product-step*').addClass('product-step4');
+    toTop();
+  })
+  $('#labelStep5').on('click', function(){
+    $('body').alterClass('product-step*').addClass('product-step5');
+    toTop();
+  })
+  $('.progress_inner__step').on('click', function(){
+    $(this).nextAll('.progress_inner__step').removeClass('active');
+    $(this).prevAll('.progress_inner__step').addClass('active');
+    $(this).addClass('active');
+  })
+  $('.atcForm').on('keypress', function(event) {
+    if (event.charCode === 13) {
+      event.preventDefault();
+    }
+  })
+  
+  var preSetEmail = sessionStorage.getItem('customer_email');
+  if (preSetEmail) {
+  	$("#email-address").val(preSetEmail);
+  }
+  
+  function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+function validate() {
+  var $result = $("#result");
+  var email = $("#email-address").val();
+  $result.text("");
+  if (validateEmail(email)) {
+    //$result.text(email + " is valid :)");
+    //$result.css("color", "green");
+    $("#email-address").removeClass('form-control--error');
+    window.sessionStorage.setItem('customer_email', email);
+    document.getElementById('labelStep3').click();
+  } else {
+    if(email == '')
+    {
+      	$result.text("Please enter your email address.");
+    }else{
+    	$result.text("Please enter a valid email address.");
+    }
+    
+    $result.css("color", "red");
+    $("#email-address").addClass('form-control--error');
+  }
+  return false;
+}
+$("#email-address").keyup(function(){
+	$("#email-address").removeClass('form-control--error');
+  	$("#result").text("");
+});
+
+</script>

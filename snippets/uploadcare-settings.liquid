@@ -1,0 +1,103 @@
+<script charset="utf-8" src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+<script>
+  UPLOADCARE_PUBLIC_KEY = 'ac8b2504a4d8cd397aaf';
+  UPLOADCARE_TABS = '';
+  UPLOADCARE_IMAGES_ONLY = true;
+  UPLOADCARE_PREVIEW_STEP = true;
+  UPLOADCARE_CLEARABLE = true;
+  UPLOADCARE_SYSTEM_DIALOG = true;
+  UPLOADCARE_LOCALE_TRANSLATIONS = {
+  buttons: {
+    choose: {
+      images: {
+        one: 'Upload a Photo'
+      } } } };
+  
+  function installWidgetPreviewSingle(widget, img) {
+    widget.onChange(function(file) {
+      img.css('visibility', 'hidden');
+      img.attr('src', '');
+      if (file) {
+        file.done(function(fileInfo) {
+          img.attr('src', fileInfo.cdnUrl);
+          img.css('visibility', 'visible');
+        });
+      }
+    });
+  }
+  $(function() {
+    $('.image-preview-single').each(function() {
+      installWidgetPreviewSingle(
+        uploadcare.SingleWidget($(this).children('input')),
+        $(this).children('img')
+      );
+    });
+  });
+</script>
+<style>
+  .uploadcare--widget__button_type_open {
+    height: 160px;
+    width: 200px;
+    padding: 20px;
+    background: none;
+    border: 2px dashed #dddddd;
+    border-radius: 10px;
+    color: #333333 !important;
+    font-size: 20px !important;
+  }
+  .uploadcare--widget__button_type_open:hover {
+    background: none;
+  }
+  .uploadcare--widget__button_type_open:before {
+    display: block;
+    content: '';
+    margin-bottom: 10px;
+    background-image: url('https://cdn.shopify.com/s/files/1/1543/9345/t/43/assets/icon-camera.svg');
+    background-repeat: no-repeat;
+    background-size: 80px;
+    background-position: center;
+    width: 100%;
+    height: 80px;
+  }
+  .image-preview-single img {
+  	max-width: 160px;
+  	max-height: 160px;
+  	visibility: hidden;
+  	display: block;
+  	margin: 0 auto;
+  }
+  .image-preview-single img[src=""] {
+    display: none;
+  }
+  .uploadcare--widget__text {
+    display: none;
+  }
+  .image-preview-single .uploadcare--progress_type_canvas { 
+  	width: auto;
+  	height: auto;
+    /*padding: 20px;*/
+  	margin: 0 auto;
+  	color: #339af0;
+  }
+  .uploadcare--progress__canvas {
+    width: 120px;
+    height: 120px;
+  }
+  .image-preview-single .uploadcare--progress_type_canvas:after {
+    display: block;
+    content: 'Uploading... Please Wait';
+    font-size: 20px;
+    line-height: 50px;
+    color: #333333;
+  }
+  .image-preview-single .uploadcare--widget_status_started .uploadcare--widget__progress {
+  	display: block;
+  }
+  .image-preview-single .uploadcare--widget {
+    text-align: center;
+    display: block;
+  }
+  .uploadcare--widget__button_type_remove {
+    margin-top: 10px;
+  }
+</style>

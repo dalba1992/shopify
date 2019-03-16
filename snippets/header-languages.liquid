@@ -1,0 +1,19 @@
+{% if section.settings.languages %}
+    <!-- Header Language -->
+    <div class="dropdn dropdn_language">
+        <div class="dropdn dropdn_caret">
+            <a href="#" class="dropdn-link">ENG</a>
+            <div class="dropdn-content">
+                <div class="container">
+                    <ul>
+                        <li><a href="/"><img src="{{ 'en.png' | asset_url }}" alt />English</a></li>
+                        <li><a href="/"><img src="{{ 'sp.png' | asset_url }}" alt="">Spanish</a></li>
+                        <li><a href="/"><img src="{{ 'de.png' | asset_url }}" alt />German</a></li>
+                        <li><a href="/"><img src="{{ 'fr.png' | asset_url }}" alt />French</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Header Language -->
+{% endif %}

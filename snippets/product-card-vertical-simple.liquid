@@ -1,0 +1,13 @@
+<div class="prd prd-vertical-simple">
+    <div class="prd-inside">
+        <div class="prd-img-area">
+            <a href="{{ product.url }}" class="prd-img"><img src="{{ product.featured_image.src | img_url: '175x' }}" srcset="{{ product.featured_image.src | img_url: '175x' }} 1x,{{ product.featured_image.src | img_url: '175x', scale:2 }} 2x" alt="{{ product.featured_image.alt | escape }}"></a>
+        </div>
+        <div class="prd-info">
+            <div class="prd-tag prd-hidemobile"><span>{{ product.vendor }}</span></div>
+            <h2 class="prd-title"><a title="{{ product.title  }}" href="{{ product.url | within: collection }}">{{ product.title | truncate: 17 }}</a></h2>
+            <div class="prd-rating prd-hidemobile"><span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></div>
+            {% include 'product-card-price' %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+{% unless settings.slides_mode %}
+<div class="holder fullboxed py-3 py-md-7 holder-bg-08">
+	<div class="container">
+		<a href="{{ section.settings.link_1 | default:'#' }}" class="bnr bnr-discount bnr-discount--left">
+			<div class="row">
+				<div class="col-md">
+					<div class="bnr-discount-caption">
+						<div class="bnr-discount-text-wrap" style="background-color: #f7fcff;">
+							<div class="bnr-text1">{{ section.settings.caption_1 }}</div>
+							<div class="bnr-text2">{{ section.settings.desc_1 }}</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md bnr-discount-image"><img src="{% if section.settings.image_1 %}{{ section.settings.image_1 | img_url:'master' }}{% else %}{{ 'discount-banner-toys-01.jpg'  | asset_url }}{% endif %}" alt=""></div>
+			</div>
+		</a>
+		<a href="{{ section.settings.link_2 | default:'#' }}" class="bnr bnr-discount bnr-discount--right">
+			<div class="row">
+				<div class="col-md">
+					<div class="bnr-discount-caption">
+						<div class="bnr-discount-text-wrap" style="background-color: #f7fcff;">
+							<div class="bnr-text1">{{ section.settings.caption_2 }}</div>
+							<div class="bnr-text2">{{ section.settings.desc_2 }}</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md bnr-discount-image"><img src="{% if section.settings.image_2 %}{{ section.settings.image_2 | img_url:'master' }}{% else %}{{ 'discount-banner-toys-02.jpg'  | asset_url }}{% endif %}" alt=""></div>
+			</div>
+		</a>
+	</div>
+</div>
+{% endunless %}
+{% schema %}
+{
+"name": "Banners 2 + text Style 7",
+"class": "index-section",
+"settings": [
+{
+"type": "header",
+"content": "Layout"
+},
+{
+"type": "select",
+"id": "outer_margin",
+"label": "Outer top margin",
+"options":[
+{"value":"mt-0","label":"None"},
+{"value":"mt-1","label":"10px"},
+{"value":"mt-2","label":"20px"},
+{"value":"mt-3","label":"30px"},
+{"value":"mt-4","label":"40px"},
+{"value":"mt-5","label":"50px"},
+{"value":"mt-6","label":"60px"},
+{"value":"mt-65","label":"65px"},
+{"value":"mt-7","label":"70px"},
+{"value":"mt-8","label":"80px"},
+{"value":"mt-9","label":"90px"},
+{"value":"mt-10","label":"100px"}
+],
+"default": "mt-65"
+},
+{
+"type": "header",
+"content": "Product 1"
+},
+{
+"type": "image_picker",
+"id": "image_1",
+"label": "Image",
+"info":"recommended width 555x460px (like in demo)"
+},
+{
+"type": "url",
+"id": "link_1",
+"label": "Link"
+},
+{
+"type": "text",
+"id": "caption_1",
+"label": "Caption",
+"default":"discounts"
+},
+{
+"type": "textarea",
+"id": "desc_1",
+"label": "Description",
+"default":"for stuffed animals<span class='bnr-text2-brd'></span>"
+},
+{
+"type": "header",
+"content": "Product 2"
+},
+{
+"type": "image_picker",
+"id": "image_2",
+"label": "Image",
+"info":"recommended width 555x460px (like in demo)"
+},
+{
+"type": "url",
+"id": "link_2",
+"label": "Link"
+},
+{
+"type": "text",
+"id": "caption_2",
+"label": "Caption",
+"default":"limited discounts"
+},
+{
+"type": "textarea",
+"id": "desc_2",
+"label": "Description",
+"default":"for new Lego constructors<span class='bnr-text2-brd'></span>"
+}
+
+],
+"presets": [
+{
+"name": "Banners 2 + text Style 7",
+"category": "Banners"
+}
+]
+}
+{% endschema %}

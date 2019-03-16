@@ -1,0 +1,119 @@
+{% if quick_view == 'yes' %}
+    {% assign show_label_sale = settings.qv_show_label_sale %}
+    {% assign show_label_new = settings.qv_show_label_new %}
+    {% assign product_sku = settings.product_sku %}
+    {% assign product_availability = settings.product_availability %}
+    {% assign product_inventory_count = settings.product_inventory_count %}
+{% else %}
+    {% assign show_label_sale = section.settings.show_label_sale %}
+    {% assign show_label_new = section.settings.show_label_new %}
+    {% assign product_sku = section.settings.product_sku %}
+    {% assign product_availability = section.settings.product_availability %}
+    {% assign product_inventory_count = section.settings.product_inventory_count %}
+{% endif %}
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    {% assign variant = product.selected_or_first_available_variant %}
+    {% capture price %}{{ product.price | money }}{% endcapture %}
+    <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+    <meta itemprop="price" content="{{ product.selected_or_first_available_variant.price | divided_by: 100.00 }}">
+    <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+    <div class="prd-block_info product-info-block-id-{{ product.id }}">
+        <div class="js-prd-d-holder prd-holder">
+            <div class="prd-block_title-wrap">
+                <h1 class="prd-block_title">{{ product.title }}</h1>
+                {% assign sale_condition = false %}
+                {% assign new_condition = false %}
+                {% if on_sale and show_label_sale %}{% assign sale_condition = true %}{% endif %}
+                {% for tag in product.tags %}{% if tag == 'new' %}{% assign new = 1 %}{% endif %} {% endfor %}
+                {% if new == 1  and show_label_new %}{% assign new_condition = true %}{% endif %}
+                {% if sale_condition or new_condition %}
+                    <div class="prd-block__labels">
+                        {% if on_sale and show_label_sale %}<span class="prd-label--sale">{{ 'products.product.sale' | t }}</span>{% endif %}
+                        {% if new == 1  and show_label_new %}<span class="prd-label--new">{{ 'general.theme.new' | t }}</span>{% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="prd-block_info-top">
+                {% if product_sku and product.selected_or_first_available_variant.sku.size > 0 %}
+                    <div class="product-sku">{{ 'general.theme.sku' | t }}: <span>{{ product.selected_or_first_available_variant.sku }}</span></div>
+                {% endif %}
+                {% if section.settings.product_rating %}
+                    <div class="prd-rating">
+                        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                    </div>
+                {% endif %}
+                {% if product_availability %}
+                    <div class="prd-availability">
+                        {% assign total=0 %}
+                        {%for variant in product.variants %}
+                            {% capture i %}{{ total | plus:variant.inventory_quantity }}{%endcapture%}
+                            {% assign total = i %}
+                        {%endfor%}
+                        {% capture text_item %}{{ 'general.theme.item' | t }}{% endcapture %}
+                        {% capture text_items %}{{ 'general.theme.items' | t }}{% endcapture %}
+                        {{ 'general.theme.availability' | t }}: <span>
+                            {% if product.selected_or_first_available_variant.inventory_management == 'shopify' and product.selected_or_first_available_variant.inventory_quantity < 0 and product.selected_or_first_available_variant.inventory_policy == 'continue' %}
+                                {{ 'general.theme.pre_order' | t }}
+                            {% else %}
+                                {% if sold_out %}
+                                    {{ 'products.product.sold_out' | t }}
+                                {% else %}
+                                    {{ 'general.theme.in_stock' | t }}
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+                {% if section.settings.vendor %}
+                    {% if product.vendor != blank %} <div class="prd-availability">{{ 'general.theme.vendor' | t }}: <span>{{ product.vendor }}</span></div> {% endif %}
+                {% endif %}
+            </div>
+
+            {% assign introtext = product.metafields.c_f.introtext %}
+            {% if introtext != blank %}
+                {% if introtext != '-' %}
+                    <div class="prd-block_description  {% if template == 'product.style-2' %}bordered{% else %}topline{% endif %} ">{{ introtext }}</div>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% unless settings.catalog_mode %}
+            {% form 'product', product %}
+                {% include 'product-options-form' %}
+                <div class="prd-block_actions topline">
+                    <div class="prd-block_price">
+                        <span class="prd-block_price--actual">{% if product.price_varies %}{{ 'products.general.from_html' | t: price: price }}{% else %}{{ price }}{% endif %}</span>
+                        {% if on_sale %}
+                        <span class="prd-block_price--old">{{ product.compare_at_price | money }}</span>
+                        {% endif %}
+                    </div>
+                    {% if product.available %}
+                    <div class="btn-wrap">
+                        {% capture status %}{{ 'general.theme.add_to_cart' | t }}{% endcapture %}
+                        {% if product.selected_or_first_available_variant.inventory_management == "shopify" and product.selected_or_first_available_variant.inventory_quantity < 1 and product.selected_or_first_available_variant.inventory_policy == "continue" %}
+                            {% capture status %}{{ 'general.theme.pre_order' | t }}{% endcapture %}
+                        {% endif %}
+                        <button class="btn btn--animate btn--add-to-cart  js-add-to-cart-product-page"  data-variant-id="{{ product.selected_or_first_available_variant.id }}" title="{{ status }}"><span class="text-sent">{% if section.settings.dynamic_buy_now %}<i class="icon-check-box"></i>{% else %}{{ 'general.theme.added_to_cart' | t }}{% endif %}</span><i class="icon-handbag"></i>{% unless section.settings.dynamic_buy_now %}<span>{{ status }}</span>{% endunless %}</button>
+                        {% if section.settings.dynamic_buy_now %}{{ form | payment_button }}{% endif %}
+                  	</div>
+                    {% endif %}
+                    <div class="prd-block_link">
+                        {% if settings.wishlist %}<a href="/account" class="icon-heart-1"></a>{% endif %}
+                        {% if settings.social_sharing_products %}
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b10f4bd90cdf8c3"></script>
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_inline_share_toolbox"></div>
+                        {% endif %}
+                    </div>
+                    {% assign safe_checkout_image_yes = section.settings.safe_checkout_image_yes %}
+                    {% if safe_checkout_image_yes %}
+                        <div class="prd-safecheckout">
+                            <h3 class="h2-style">{{ 'general.theme.safe_checkout' | t }}</h3>
+                            <img src="{% if section.settings.safe_checkout_image != blank %}{{ section.settings.safe_checkout_image | img_url:'master' }}{% else %}{{ 'safecheckout01.png' | asset_url }}{% endif %}" alt="" class="img-responsive">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endform %}
+        {% endunless %}
+    </div>
+</div>

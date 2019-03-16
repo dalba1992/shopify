@@ -1,0 +1,143 @@
+/*=================== VARIABLES ====================*/
+/*===================================================
+
+  $variable name: property (color, font family, etc ) !default;
+
+  You can change only property (right part of expression).
+  Do not change the variable name!!!
+
+  Some properties inherit other variables, e.g.:
+  $heading_color: $text_color_dark !default;
+
+  You can change this property to your own, e.g.:
+  $heading_color: #ff00ff;
+
+====================================================*/
+.bnslide-fashion-4 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xs {
+  font-size: 0.3em; }
+  @media screen and (max-width: 481px) {
+    .bnslide-fashion-4 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xs {
+      font-size: .45em; } }
+
+@media screen and (max-width: 481px) {
+  .bnslide-fashion-4 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xxs {
+    font-size: .24em; } }
+
+@media screen and (max-width: 481px) {
+  .bnslide-fashion-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xxs:first-child {
+    font-size: .32em;
+    line-height: 1.5em; }
+  .bnslide-fashion-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--sm {
+    letter-spacing: .15em; }
+  .bnslide-fashion-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert > *:not(:first-child):not(.clearfix):not(.btn-slider) {
+    margin-top: 32px; } }
+
+.bnslide-fashion-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--sm {
+  font-size: .36em; }
+
+@media screen and (max-width: 481px) {
+  .bnslide-fashion-2 .bnslider-text-content .bnslider-text-content-flex .w-50 {
+    width: 62% !important;
+    margin-left: -7px !important;
+    padding: 0; }
+  .bnslide-fashion-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md {
+    font-size: .88em; }
+  .bnslide-fashion-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--sm {
+    font-size: .42em; }
+  .bnslide-fashion-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xxs {
+    font-size: .23em;
+    margin-top: 10px !important; } }
+
+@media screen and (max-width: 481px) {
+  .bnslide-fashion-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xxs {
+    font-weight: 600 !important; }
+  .bnslide-fashion-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xxs:first-child {
+    font-size: .32em;
+    line-height: 1.5em; }
+  .bnslide-fashion-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--sm {
+    letter-spacing: .15em; }
+  .bnslide-fashion-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert > *:not(:first-child):not(.clearfix):not(.btn-slider) {
+    margin-top: 32px; } }
+
+@media screen and (max-width: 481px) {
+  .bnslide-watches-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+  .bnslide-watches-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+  .bnslide-watches-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert {
+    margin-top: -10%; }
+  .bnslide-watches-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--sm,
+  .bnslide-watches-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--sm,
+  .bnslide-watches-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--sm {
+    font-size: .40em;
+    letter-spacing: .1em; } }
+
+.bnslide-sport-1 .bnslider-text-content .bnslider-text-content-flex
+.bnslide-sport-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md,
+.bnslide-sport-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md {
+  font-size: .3em; }
+  @media screen and (max-width: 481px) {
+    .bnslide-sport-1 .bnslider-text-content .bnslider-text-content-flex
+.bnslide-sport-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md,
+    .bnslide-sport-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md {
+      margin-top: 10px !important; } }
+
+@media screen and (max-width: 481px) {
+  .bnslide-sport-1 .bnslider-text-content .bnslider-text-content-flex
+.bnslide-sport-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xxs,
+  .bnslide-sport-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--xxs {
+    font-size: .22em;
+    margin-top: 15px !important; } }
+
+.bnslide-sport-1 .bnslider-text-content .bnslider-text-content-flex
+.bnslide-sport-2 .bnslider-text-content .bnslider-text-content-flex .btn-wrap,
+.bnslide-sport-3 .bnslider-text-content .bnslider-text-content-flex .btn-wrap {
+  margin-top: .5em; }
+
+@media screen and (max-width: 481px) {
+  .bnslide-sport-1 .bnslider-text-content .bnslider-text-content-flex
+.bnslide-sport-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+  .bnslide-sport-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert {
+    margin-top: -12%; } }
+
+@media screen and (max-width: 481px) {
+  .bnslide-toys-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+  .bnslide-toys-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+  .bnslide-toys-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert {
+    margin-top: -12%; }
+  .bnslide-toys-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md,
+  .bnslide-toys-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md,
+  .bnslide-toys-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md {
+    font-size: .5em; } }
+  @media screen and (max-width: 481px) and (max-width: 481px) {
+    .bnslide-toys-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md,
+    .bnslide-toys-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md,
+    .bnslide-toys-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--md {
+      font-size: .45em; } }
+
+.bnslide-furniture-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+.bnslide-furniture-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+.bnslide-furniture-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert {
+  margin-top: 12%;
+  width: 36%; }
+
+.bnslide-furniture-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--lg,
+.bnslide-furniture-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--lg,
+.bnslide-furniture-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--lg {
+  font-size: .54em;
+  line-height: 1.3em;
+  font-weight: 800; }
+
+@media screen and (max-width: 481px) {
+  .bnslide-furniture-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+  .bnslide-furniture-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert,
+  .bnslide-furniture-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-vert {
+    margin-top: 12%;
+    width: 50%; }
+  .bnslide-furniture-1 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--lg,
+  .bnslide-furniture-2 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--lg,
+  .bnslide-furniture-3 .bnslider-text-content .bnslider-text-content-flex .bnslider-text--lg {
+    font-size: .56em; } }
+
+.bnslide-furniture-1 .bnslider-text-content .bnslider-text-content-flex .btn-wrap > .btn-decor .btn-line,
+.bnslide-furniture-2 .bnslider-text-content .bnslider-text-content-flex .btn-wrap > .btn-decor .btn-line,
+.bnslide-furniture-3 .bnslider-text-content .bnslider-text-content-flex .btn-wrap > .btn-decor .btn-line {
+  background-color: #d6641f; }

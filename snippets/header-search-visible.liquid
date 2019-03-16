@@ -1,0 +1,8 @@
+{% if section.settings.header_search %}
+<!-- Header Search -->
+<form  action="/search">
+    <button type="submit" class="search-button"><i class="icon-search2"></i></button>
+    <input name="q" class="search-input" placeholder="{{ 'general.theme.search_keyword' | t }}" type="text" value="{{ search.terms | escape }}">
+</form>
+<!-- /Header Search -->
+{% endif %}

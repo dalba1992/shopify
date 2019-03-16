@@ -1,0 +1,62 @@
+<footer class="page-footer  footer-style-1">
+            <div class="container">
+                <div class="row">
+                  <div class="col-md footer-begin d-flex py-4 justify-content-center">
+                    <div class="mr-2">
+                      <svg class="icon-check-badge"><use xlink:href="#icon-check-badge"></use></svg>
+                    </div>
+                    <div>
+                      <h4>Satisfaction Guarantee</h4>
+                      <p>We will work directly with you until the artwork is completely perfect.</p>
+                    </div>
+                  </div>
+                  <div class="col-md footer-begin d-flex py-4 justify-content-center">
+                    <div class="mr-2">
+                      <svg class="icon-star-badge"><use xlink:href="#icon-star-badge"></use></svg>
+                      </div>
+                    <div>
+                      <h4>Excellent Service</h4>
+                      <p>Our team of highly trained agents are always here to help.</p>
+                    </div>
+                  </div>
+                  <div class="col-md footer-begin d-flex py-4 justify-content-center">
+                    <div class="mr-2">
+                      <svg class="icon-secure-badge"><use xlink:href="#icon-secure-badge"></use></svg>
+                      </div>
+                    <div>
+                      <h4>Secure Checkout</h4>
+                      <p>We ensure your information is safe so you can enjoy risk-free shopping.</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    {% include 'newsletter-inline' %}
+    <div class="footer-top container text-center">
+        <div class="row py-4">
+            <div class="col">
+               <ul>
+               {% for link in linklists.footer.links %}
+                 <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+               {% endfor %}
+               </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom container text-center">
+        <div class="row">
+          
+            <div class="col-12">
+                {% include 'footer_payments' %}
+            </div>
+            <div class="col-12">
+              <svg class="icon-ilovepaws-logo"><use xlink:href="#icon-ilovepaws-logo"></use></svg>
+            </div>
+          <div class="col-12">
+                {% include 'social-media-links' %}
+            </div>
+            <div class="col-12 footer-copyright">
+               <p class="footer-copyright-text">Copyright © 2019 iLovePaws LLC</p>
+              <p class="footer-copyright-links"><a href="">Terms & Conditions</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+</footer>

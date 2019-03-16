@@ -1,0 +1,127 @@
+{% unless settings.slides_mode %}
+{% include 'global_vars' %}
+<div class="holder fullwidth {{ section.settings.outer_margin }} full-nopad py-3 py-md-7 holder-bg-16 {% if column %}aside--bg-none{% endif %}">
+    <div class="container">
+        <div class="collection-carousel-2 data-slick slick-arrows-squared"
+             data-slick='{"slidesToShow": {% if column %}3{% else %}5{% endif %}, "responsive": [{"breakpoint": 1200,"settings": {"slidesToShow": 4}},{"breakpoint": 992,"settings": {"slidesToShow": 3}},{"breakpoint": 768,"settings": {"slidesToShow": 2}},{"breakpoint": 480,"settings": {"slidesToShow": 1}}]}'>
+            {% for block in section.blocks %}
+            {% if block.settings.enable %}
+            <div class="collection-carousel-2-item">
+                <a href="{{ block.settings.link }}" target="{{ block.settings.link_target }}" class="bnr-wrap collection-carousel-2-item-inside">
+                    <div class="collection-carousel-2-img">
+                        <img src="{% if block.settings.image %}{{ block.settings.image | img_url:'master' }}{% else %}{{ 'category-plumbing-01.jpg'  | asset_url }}{% endif %}" alt="">
+                    </div>
+                    <h3 class="collection-carousel-2-title">{{ block.settings.title }}</h3>
+                    <span  class="btn-decor">{{ block.settings.link_text }}</span>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endunless %}
+{% schema %}
+{
+"name": "Collections carousel",
+"settings": [
+{
+"type": "header",
+"content": "Layout"
+},
+{
+"type": "select",
+"id": "outer_margin",
+"label": "Outer top margin",
+"options":[
+{"value":"mt-0","label":"None"},
+{"value":"mt-1","label":"10px"},
+{"value":"mt-2","label":"20px"},
+{"value":"mt-3","label":"30px"},
+{"value":"mt-4","label":"40px"},
+{"value":"mt-5","label":"50px"},
+{"value":"mt-6","label":"60px"},
+{"value":"mt-65","label":"65px"},
+{"value":"mt-7","label":"70px"},
+{"value":"mt-8","label":"80px"},
+{"value":"mt-9","label":"90px"},
+{"value":"mt-10","label":"100px"}
+],
+"default": "mt-65"
+}
+],
+"blocks": [
+{
+"type": "banner",
+"name": "Banner",
+"settings": [
+{
+"type":"checkbox",
+"id":"enable",
+"label":"Enable",
+"default":true
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "Bathroom Taps"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image",
+"info":"recommended size 295x245px with white bg (like in demo)"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Collection link"
+},{
+"type": "text",
+"id": "link_text",
+"label": "Collection link text",
+"default": "shop now"
+},
+{
+"type": "select",
+"id": "link_target",
+"label": "Link Target",
+"default":"_self",
+"options": [
+{ "value": "_blank", "label": "New page" },
+{ "value": "_self",  "label": "In current page" }
+]
+}
+]
+}
+],
+"presets": [{
+"name": "Collections carousel",
+"category": "Collections",
+"blocks": [
+{
+"type": "banner"
+},
+{
+"type": "banner"
+},
+{
+"type": "banner"
+},
+{
+"type": "banner"
+},
+{
+"type": "banner"
+},
+{
+"type": "banner"
+},
+{
+"type": "banner"
+}
+]
+}]
+}
+{% endschema %}

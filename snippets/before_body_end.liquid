@@ -1,0 +1,54 @@
+{{ 'lazysizes.min.js' | asset_url | script_tag }}
+<!--HTML INCLUDES-->
+{% include 'global_vars' %}
+{% include 'back_to_top' %}
+{% if settings.newsletter_popup_home_only_yes %}
+    {% if home %}
+        {% include 'newsletter-popup' %}
+    {% endif %}
+{% else %}
+    {% include 'newsletter-popup' %}
+{% endif %}
+{% include 'modals' %}
+{% include 'search_autocomplete' %}
+<!--JS SHOPIFY INCLUDES-->
+<script>
+    jQuery(function() {
+        CartJS.init({{ cart | json }}, {
+            "dataAPI": false,
+            "requestBodyClass": "loading",
+            "moneyFormat": "{{ shop.money_format }}",
+            "moneyWithCurrencyFormat": "{{ shop.money_with_currency_format }}"
+        });
+    });
+</script>
+{% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag | replace:'type="text/javascript"',''  }}
+{% endif %}
+{% include 'currencies' %}
+<!--JS THEME Min files for better perfomance Production Mode -->
+{{ 'bootstrap.bundle.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'slick.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'jquery-scrollLock.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'instafeed.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'jquery.countdown.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'imagesloaded.pkgd.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'jquery.ez-plus.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'tocca.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'bootstrap-tabcollapse.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'jquery.isotope.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'jquery.fancybox.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'bootstrap-select.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{% if home and slides_mode %}
+    {{ 'scrolloverflow.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+    {{ 'fullpage.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+    {{ 'perfect-scrollbar.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{% endif %}
+{{ 'slider.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'app.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+<!--JS THEME SHOPIFY CONST INCLUDES-->
+{{ 'cart.min.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'option_selection.js' | shopify_asset_url | script_tag | replace:'type="text/javascript"','' }}
+{{ 'helper.js' | asset_url | script_tag | replace:'type="text/javascript"','' }}
+{% if template == 'product' %}{% include 'uploadcare-settings' %}{% endif %}
+<script async type="text/javascript" data-api-key="" id="stamped-script-widget" src="https://cdn-stamped-io.azureedge.net/files/widget.min.js"></script>

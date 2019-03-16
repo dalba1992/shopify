@@ -1,0 +1,228 @@
+<style>
+  .collapse.in {
+    display: block;
+  }
+  .search-page-search-form .search-results li > a {
+    color: inherit;
+  }
+  .search-page-search-form .search-results li {
+    border-top-color: #e2e2e2;
+  }
+  .search-page-search-form .search-results li:before {
+    position: absolute;
+    left: 0;
+    background-image: url("https://cdn.shopify.com/s/files/1/1543/9345/t/43/assets/icon-search.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1rem 1rem;
+    width: 48px;
+    height: 27px;
+    content: '';
+    opacity: 0.33;
+  }
+</style>
+
+<div class="faq-page">
+  <div class="holder bg-blue fullboxed">
+    <div class="container pb-4 text-center">
+      <div class="page-title">
+        <h2 class="h1 mb-3">How can we help?</h2>
+      </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="form-control-wrap search-wrap search-page-search-form">
+                <svg class="icon-search"><use xlink:href="#icon-search"></use></svg>
+                <svg class="icon-close"><use xlink:href="#icon-cross"></use></svg>
+                  <input type="text" class="form-control form-control-lg faq-search" placeholder="Type keywords to find answers">
+                  <ul class="search-results"></ul>
+              </div>
+              </div>
+          </div>
+    </div>
+  </div>
+  <div class="holder mt-4">
+      <div class="container">
+        <div class="row">
+        <div class="col">
+        <h1 class="h4 mb-3">Help Topics</h1>
+        <div class="faq-wrapper panel-group" id="accordion">
+          {%  assign categories = section.settings.categories | split:',' %}
+          {% for category in categories %}
+          <div class="panel">
+            <div class="panel-heading">
+              <h6 class="panel-title mb-0">
+                <a data-toggle="collapse" data-parent="#accordion" href="#category{{ category | handle }}">
+                  {{ category }}
+                </a>
+              </h6>
+            </div>
+            <div id="category{{ category | handle }}" class="panel-collapse collapse category">
+              <div class="panel-group" id="questions">
+                {% for block in section.blocks %}
+                {% if block.settings.enable and block.settings.category == category %}
+                <div class="faq-item">
+                  <div class="panel">
+                    <div class="panel-heading">
+                      <a data-toggle="collapse" data-parent="#questions" class="panel-title" href="#faq{{ block.id }}">
+                        {{ block.settings.title }}
+                      </a>
+                    </div>
+                    <div id="faq{{ block.id }}" class="panel-collapse collapse question">
+                      <div class="panel-body">
+                        <p>{{ block.settings.answer }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col mt-5 text-center">
+            <span class="mr-1">Still need help?</span>
+            <a href="#" class="btn btn-primary btn-lg">Contact Us</a>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% javascript %}
+
+var timer;
+var questions = Array.prototype.slice.call($('.faq-wrapper .category .panel-title'));
+var resultsBox = $('.search-results');
+var isFirstLoad = true;
+
+$('.faq-search').keyup(function () {
+    var searchValues = this.value && this.value.toLowerCase().split(' ');
+    if (searchValues) {
+        $('.icon-close').css('display', 'inline-block')
+    } else {
+        $('.icon-close').css('display', 'none')
+    }
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+        var matched = questions.filter(function (question) {
+            return searchValues && searchValues.every(function (search) {
+                return question.innerText.toLowerCase().indexOf(search.trim()) !== -1;
+            });
+        });
+        resultsBox.empty().append(generateResultsList(matched)).show();
+    }, 500);
+
+    function generateResultsList(items) {
+        var result = [];
+        items.forEach(function (item) {
+            result.push('<li><a data-target="' + item.hash + '" data-parent-target="#' + $(item).parents('.panel-collapse')[0].id + '" class="search-item">' + item.innerText + '</a></li>');
+        });
+        if (! result.length) {
+            result.push('<li class="empty-row">NO RESULTS FOUND, TRY ANOTHER KEYWORD</li>');
+        }
+        return result;
+    }
+});
+$('.icon-close').click(function () {
+    $('.faq-search').val('');
+    $('.faq-search').focus();
+    $('.icon-close').css('display', 'none');
+});
+$('.search-results').on('click', '.search-item', function (event) {
+    var targetElement = event.currentTarget;
+    var jqueryTarget = $(targetElement.getAttribute('data-target'));
+    $(targetElement.getAttribute('data-parent-target')).collapse('show');
+    setTimeout(function () {
+        var isMobile = $('.hdr-mobile.show-mobile').is(":visible");
+        var header = isMobile
+            ? $('.hdr-mobile.show-mobile')
+            : $('.sticky-holder');
+        var elementPosition = jqueryTarget.parent().offset().top;
+        var headerHeight = isMobile
+            ? header.outerHeight()
+            : (
+                elementPosition >= 640
+                    ? header.outerHeight()
+                    : 0
+            );
+        jqueryTarget.collapse('show');
+        window.scroll({
+            top: elementPosition - headerHeight,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }, 400);
+});
+$('.panel-collapse.question').on('show.bs.collapse', function (event) {
+    var parentId = $(event.currentTarget).parents('.panel-collapse')[0].id;
+    var questionId = event.currentTarget.id;
+    $('.panel-collapse:not("#' + parentId + '"):not("#' + questionId + '")').collapse('hide');
+    $(event.currentTarget).prev().addClass('active');
+    event.stopPropagation();
+});
+
+$('.panel-collapse.question').on('hide.bs.collapse', function (event) {
+    event.stopPropagation();
+    $(event.currentTarget).prev().removeClass('active');
+});
+$('.panel-collapse.category').on('show.bs.collapse', function (event) {
+    if (isFirstLoad) {
+        isFirstLoad = false;
+        return false;
+    }
+    $('.panel-collapse').collapse('hide');
+});
+// # sourceURL=faq-page.js
+
+{% endjavascript %}
+{% schema %}
+
+{
+    "name": "Faq",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Add question/answer"
+        }, {
+            "type": "textarea",
+            "id": "categories",
+            "label": "Categories",
+            "default": "General,Artwork & Photos,Products,Orders,Production,Shipping & Delivery,Terms & Policies"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "item",
+            "name": "Question. Answer.",
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "enable",
+                    "label": "Enable",
+                    "default": true
+                }, {
+                    "type": "textarea",
+                    "id": "title",
+                    "label": "Answer",
+                    "default": "Why Choose Shopify?"
+                }, {
+                    "type": "text",
+                    "id": "category",
+                    "label": "Category",
+                    "default": "Default"
+                }, {
+                    "type": "textarea",
+                    "id": "answer",
+                    "label": "Answer",
+                    "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+                }
+            ]
+        }
+    ]
+}
+
+{% endschema %}

@@ -1,0 +1,165 @@
+{% unless settings.slides_mode %}
+{% include 'global_vars' %}
+<div class="holder py-3 py-md-6 fullboxed {% if column %}aside--bg-none{% endif %} holder-bg-11">
+    <div class="container">
+        <div class="row vert-margin">
+            <div class="col-lg-6 aside-col-lg-4">
+                {{ section.settings.banner_1 }}
+            </div>
+            <div class="col-lg-6 aside-col-lg-8">
+                <div class="prd-promo prd-promo-carousel vert-dots" data-slick='{"adaptiveHeight": false }'>
+                    {% for block in section.blocks %}
+                        {% if block.settings.enable %}
+                            <div class="prd-hor">
+                                <div class="prd-inside">
+                                    {% if block.settings.product != blank %}
+                                        {% assign product = all_products[block.settings.product] %}
+                                        {% assign on_sale = false %}
+                                        {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+                                            {% assign on_sale = true %}
+                                        {% endif %}
+
+                                        {% assign sold_out = true %}
+                                        {% if product.available %}
+                                            {% assign sold_out = false %}
+                                        {% endif %}
+
+                                        {% assign show = true %}
+                                        {% if sold_out %}
+                                            {% unless settings.show_out_of_stock %}
+                                            {% assign show = false %}
+                                            {% endunless %}
+                                        {% endif %}
+                                        {% if show %}
+                                            <div class="prd-img-area">
+                                                <a title="{{ product.title }}" href="{{ product.url | within: collection }}" class="prd-img">
+                                                    <img  src="{{ product.featured_image.src | img_url: '393x' }}" alt="{{ product.featured_image.alt | escape }}">
+                                                </a>
+                                                {% if on_sale and settings.show_label_sale %}
+                                                    <div class="label-sale"> -{{ product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | times: 100.0 | divided_by:product.selected_or_first_available_variant.compare_at_price | times: 100 | divided_by: 100 | floor }}%</div>
+                                                {% endif %}
+                                                {% assign new = 0 %}
+                                                {% for tag in product.tags %}{% if tag == 'new' %}{% assign new = 1 %}{% endif %} {% endfor %}
+                                                {% comment %}{% if new == 1 and settings.show_label_new %}<div class="label-new"><span>{{ 'general.theme.new' | t }}</div>{% endif %}{% endcomment %}
+                                                {% if product.metafields.c_f.countdown != blank %}
+                                                    <div class="countdown-box">
+                                                        <div class="countdown js-countdown" data-countdown="{{  product.metafields.c_f.countdown }}"></div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="prd-info">
+                                                <h3 class="sidebar-block_title">{{ block.settings.title }}</h3>
+                                                <div class="inside">
+                                                    <div class="prd-tag">{{ product.vendor }}</div>
+                                                    <h2 class="prd-title"><a title="{{ product.title }}" href="{{ product.url | within: collection }}">{{ product.title }}</a></h2>
+                                                    <div class="prd-rating"><span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></div>
+                                                    {% include 'product-card-price' %}
+                                                    {% include 'prd-action' %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        <br /><br /><br />
+                                        <p style="padding: 50px;">Choose product in admin/section</p>
+                                        <br /><br /><br />
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endunless %}
+{% schema %}
+{
+"name": "Products slider+banners 2",
+"class": "index-section",
+"settings": [
+{
+"type": "header",
+"content": "Layout"
+},
+{
+"type": "select",
+"id": "outer_margin",
+"label": "Outer top margin",
+"options":[
+{"value":"mt-0","label":"None"},
+{"value":"mt-1","label":"10px"},
+{"value":"mt-2","label":"20px"},
+{"value":"mt-3","label":"30px"},
+{"value":"mt-4","label":"40px"},
+{"value":"mt-5","label":"50px"},
+{"value":"mt-6","label":"60px"},
+{"value":"mt-65","label":"65px"},
+{"value":"mt-7","label":"70px"},
+{"value":"mt-8","label":"80px"},
+{"value":"mt-9","label":"90px"},
+{"value":"mt-10","label":"100px"}
+],
+"default": "mt-65"
+},
+{
+"type": "header",
+"content": "General"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Product's slider+banners"
+},
+{
+"type": "textarea",
+"id": "banner_1",
+"label":"Banner. Paste generated html here",
+"info":"generate banners [here](http://frontend.big-skins.com/goodwin-html/banners-generator)",
+"default":"<p>Generate banner <a href='http://frontend.big-skins.com/goodwin-html/banners-generator' target='_blank'>here</a></p>"
+}
+],
+
+"blocks":
+    [
+        {
+            "type": "product",
+            "name": "product",
+            "settings":
+            [
+                {
+                    "type":"checkbox",
+                    "id":"enable",
+                    "label":"Enable",
+                    "default":true
+                },
+                {
+                    "type":"text",
+                    "id":"title",
+                    "label":"Title",
+                    "default":"Deal of the day"
+                },
+                {
+                    "type":"product",
+                    "id":"product",
+                    "label":"Product"
+                }
+            ]
+        }
+    ],
+"presets": [
+{
+"name": "Products slider+banners 2",
+"category": "Banners",
+"blocks": [
+{
+"type": "product"
+},{
+"type": "product"
+}
+]
+}
+]
+}
+{% endschema %}

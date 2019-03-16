@@ -1,0 +1,344 @@
+
+
+{% unless product.options.size == 1 and product.options.first == 'Title' %}
+{%- assign index = 0 -%}
+{% for option in product.options %}
+  {%- assign option_names = '' -%}
+  {%- assign option_title = option | downcase -%}
+  {%- assign index = forloop.index0 -%}
+  {%- assign selected_value = '' -%}
+  {%- assign color_images = '' -%}
+  {%- assign color_image = '' -%}
+  {% for variant in product.variants %}
+    {% if variant == product.selected_or_first_available_variant %}
+      {% assign selected_value = variant.options[index] %}
+    {% endif %}
+    {%- assign img_url = variant.image.src |  img_url: '1024x1024' -%}
+    {%- assign option_names = option_names | append:variant.options[index] | append:'<>' -%}
+    {%- assign color_images = color_images | append : img_url  | append:'<>' -%}
+    {%- assign check_color_name = '!__!' | append:variant.options[index] | append:'!__!' -%}
+    {% unless color_image contains check_color_name %}
+        {%- assign color_image = color_image | append:'!__!' | append:variant.options[index] | append:'!__!:' | append:img_url  | append:'<>' -%}
+    {% endunless %}
+  {% endfor %}
+  {%- assign color_images = color_images | split:'<>' | uniq -%}
+  {%- assign option_names = option_names | split:'<>' | uniq -%}
+  {%- assign color_image = color_image | split:'<>' | uniq -%}
+
+{% if forloop.first %}
+
+<div class='tab tab-2'>        
+  <div class="product-actions product-id-{{ product.selected_or_first_available_variant.id }} {% if product.variants.size == 1 and quick_view == 'yes' %}product-no-options no-border{% endif %}">            
+    {% if product.selected_or_first_available_variant.inventory_management == "shopify" and product.selected_or_first_available_variant.inventory_quantity < 1 and product.selected_or_first_available_variant.inventory_policy == "continue" %}
+    <input type="hidden" name="properties[{{ 'general.theme.status' | t }}]" value="{{ 'general.theme.pre_order' | t }}">
+    {% endif %}
+    {% if product.metafields.c_f.line_properties != blank %}
+    {{ product.metafields.c_f.line_properties }}
+    {% endif %}
+
+    {% endif %} 
+
+    {% if forloop.last %}
+
+    <div class='tab tab-3'>
+      {% if product.selected_or_first_available_variant.inventory_management == "shopify" and product.selected_or_first_available_variant.inventory_quantity < 1 and product.selected_or_first_available_variant.inventory_policy == "continue" %}
+      <input type="hidden" name="properties[{{ 'general.theme.status' | t }}]" value="{{ 'general.theme.pre_order' | t }}">
+      {% endif %}
+      {% if product.metafields.c_f.line_properties != blank %}
+      {{ product.metafields.c_f.line_properties }}
+      {% endif %}
+
+      {% endif %}                        
+
+
+
+      <div class="product-size {% if option contains 'Style' %}option-size-inches{% else %}option-{{ option | handle }}{% endif %}   {{ product_options }}">
+        <span class="option-label">{{ option }}:</span>
+        {% if product_options == 'swatches' %}
+        <ul class="{% if option_title contains 'color' %}color-list{% else %}size-list size-list-custom{% endif %} {% if option_title contains 'style' %}style-list-custom{% endif %}"   data-index="{{ forloop.index0 }}">
+          {% for name in color_image %}
+          {%- assign title = name | split:':' | first | replace:'!__!','' -%}
+          {%- assign img_src = name | split:':' | last -%}
+          <li  {% if selected_value == title %}class="active"{% endif %}>
+            {% if option_title contains 'color' %}
+            <a href="#" data-tooltip="{{ title }}" data-placement="top" title="{{ title }}" data-value="{{ title | handle | escape }}" data-image="{{ img_src }}"><span class="value"><img src="{% if settings.product_previews_colors_variants %}{{ img_src }}{% else %}{{ title | handle | prepend:'color-' | append: '.png' | file_url | downcase }}{% endif %}" alt=""></span></a>
+            {% elsif option_title contains 'size' %}                          
+            <a href="#" data-value="{{ title | handle | escape }}"><span class="image"><img src="{{ title | handle | prepend:'size-' | append: '.png' | asset_url | downcase }}" alt=""></span><span class="value">{{ title }}</span></a>
+            <div class="price">                                  
+              {% case title %}
+              {% when '8 x 10' %}
+              <span class="price-old">$79.99</span>
+              <span class="price-new">$39.99</span>
+              <span class="product-label sale">Sale</span>
+              {% when '16 x 20' %}
+              <span class="price-old">$119.99</span>
+              <span class="price-new">$59.99</span>
+              <span class="product-label sale">Sale</span>
+              {% when '24 x 30' %}
+              <span class="price-old">$159.99</span>
+              <span class="price-new">$79.99</span>
+              <span class="product-label sale">Sale</span>
+              {% endcase %}                                  
+            </div>
+
+            {% elsif option_title contains 'style' %} 
+            <a href="#"  title="{{ title }}" data-value="{{ title | handle | escape }}" data-image="{{ img_src }}"><span class="image"><img src="{{ img_src }}" alt=""></span><span class="value">{{ title }}</span></a>
+            {% if title == 'Art' %}
+            <div class="price">
+              <span class="price-new">+10$</span>
+            </div>
+            {% else %}                          
+            <div class="text">(included)</div>
+            {% endif %}                         
+
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+
+        {% endif %}
+
+      </div>                       
+
+
+      {% if forloop.first %}                            
+
+    </div>		
+    <div class="form-control-wrap">
+    <p class="line-item-property__field">
+  	<label for="email-address">Email Address:</label>
+  	<input id="email-address" class="form-control form-control-lg" type="email" name="properties[Email Address]">
+  	</p>
+      <p id="result"></p>
+      <span><small>Used to send you a preview of the artwork.</small></span>
+    </div>
+    <div class="btns-wrap">  
+      <a href="#" class="btn btn-back btn-lg" onclick="event.preventDefault();document.getElementById('labelStep1').click();"><svg class="icon-angle-left"><use xlink:href="#icon-angle-left"></use></svg></a>
+      <a class="btn btn-primary btn-lg font-24" onclick="validate()">Continue</a>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if forloop.last %}
+
+  <div class="clearfix"><span class="option-label">Background Color:</span><div style="padding:10px;background:#f0f0f0;border-radius:4px;">Selected when you receive the artwork preview.</div></div><br>
+  <div class="btns-wrap">
+    <a href="#" class="btn btn-back btn-lg" onclick="event.preventDefault();document.getElementById('labelStep2').click();"><svg class="icon-angle-left"><use xlink:href="#icon-angle-left"></use></svg></a>
+    <a href="#" class="btn btn-primary btn-lg font-24" onclick="event.preventDefault();document.getElementById('labelStep4').click();">Continue</a>  
+  </div>
+</div>
+
+{% endif %}  
+
+
+
+
+
+
+{% endfor %}
+
+
+
+
+
+{% endunless %}
+
+
+
+
+
+<script>
+  var product_options_{{ product.id }} = [];
+  {%- assign options = product.options -%}
+  {% for option in options %}
+  {%- assign option_index = forloop.index0 -%}
+  {% for variant in product.variants %}
+  {%- assign params = variant.options -%}
+  product_options_{{ product.id }}{% for name in params %}{% if forloop.index0 > option_index  %}{% continue %}{% endif %}['{{ params[forloop.index0]|handle|strip|downcase}}']{% endfor %}=[];
+  {% endfor %}
+  {% endfor %}
+  {% for variant in product.variants %}
+  {%- assign attributes = 'price,compare_at_price,id,image,inventory_quantity,inventory_management,inventory_policy,sku' | split:',' -%}
+  {% for attribute in attributes %}
+  product_options_{{ product.id }}{% for option in variant.options %}['{{ variant.options[forloop.index0] |handle|strip|downcase }}']{% endfor %}['{{ attribute|downcase }}']='{% if attribute == 'image'%}{% unless variant.image.src contains 'products' %}{{ product.featured_image |  img_url: '1024x1024' }}{% else %}{{ variant.image.src |  img_url: '1024x1024' }}{% endunless %}{% else %}{{ variant[attribute] }}{% endif %}';
+                                                                      {% endfor %}
+                                                                      {% endfor %}
+</script>
+<script>
+  {% assign product_id = product.id %}
+  product_id = {{ product.id }}
+    options_product_id = $('.product-options.id_'+product_id);
+  $options_{{ product_id }} = $('.product-options.id_{{ product_id }}');
+                                $select_{{ product_id }} = $('select',$options_{{ product_id }});
+  $ul_{{ product_id }} = $('ul',$options_{{ product_id }});
+
+
+  function updateSelectOptionsDisabling_{{ product_id }}(){
+    $('option',$select_{{ product_id }}.not(':first')).attr("disabled","disabled");
+    for(a in product_options_{{ product_id }}[$select_{{ product_id }}.first().val()]){
+      $('option[value='+a+']',$select_{{ product_id }}).removeAttr("disabled","disabled");
+      for(b in product_options_{{ product_id }}[$select_{{ product_id }}.first().val()][a]){
+        $('option[value='+b+']',$select_{{ product_id }}).removeAttr("disabled","disabled");
+      }
+    }
+  }
+
+  function currencyUpdate(){
+    Currency.convertAll(shopCurrency, jQuery('.selected-currency').text());
+  }
+
+  function removeAbsentOption_{{ product_id }}($variant,current,$ul,$this_a){
+    _this=$this_a;
+    $inventory_management = $variant['inventory_management'];
+    $inventory_policy = $variant['inventory_policy'];
+    $inventory_quantity = $variant['inventory_quantity']
+    if (($inventory_management != 'shopify') ||
+        ($inventory_management == 'shopify' && $inventory_policy == 'continue') ||
+        ($inventory_management == 'shopify' && $inventory_quantity > 0))
+    {
+      $('a[data-value=' + current + ']', $ul).parent().removeClass('absent-option');
+
+    }
+  };
+
+  function showAvailableOptions_{{ product_id }}(first_option_only,last_option_only)
+  {
+
+    first_option_only = typeof first_option_only !== 'undefined' ?  first_option_only : false;
+    last_option_only = typeof last_option_only !== 'undefined' ?  last_option_only : false;
+    if(first_option_only)
+    {
+      $a = $('a', $ul_{{ product_id }}.first());
+    } else if(last_option_only)
+    {
+      $('li',$ul_{{ product_id }}.last()).addClass("absent-option");
+      $a = $('a', $ul_{{ product_id }}.last());
+    } else
+    {
+      $('li',$ul_{{ product_id }}).addClass("absent-option");
+      $a = $('a', $ul_{{ product_id }}.not(':first'));
+    }
+    $a.each(function () {
+      current = $(this).data('value');
+      _this = $(this);
+      for (size in product_options_{{ product_id }})
+      {
+        if(!first_option_only || last_option_only){
+          size=$('li.active a',$ul_{{ product_id }}.first()).data('value');
+        }
+        if($ul_{{ product_id }}.length == 3){
+          flag_ignore_selection = false;
+          for (color in product_options_{{ product_id }}[size])
+          {
+            if(last_option_only){
+              color=$('li.active a',$ul_{{ product_id }}.not(':first').not(':last')).data('value');
+            }
+            for (material in product_options_{{ product_id }}[size][color])
+            {
+              switch (_this.closest('ul').data('index')) {
+                case 0:
+                  if (product_options_{{ product_id }}[current] != undefined && product_options_{{ product_id }}[current][color] != undefined && product_options_{{ product_id }}[current][color][material] != undefined) {
+                    removeAbsentOption_{{ product_id }}(product_options_{{ product_id }}[current][color][material],current,$ul_{{ product_id }},_this);
+                  }
+                  break;
+                case 1:
+                  if (product_options_{{ product_id }}[size] != undefined && product_options_{{ product_id }}[size][current] != undefined && product_options_{{ product_id }}[size][current][material] != undefined) {
+
+                    removeAbsentOption_{{ product_id }}(product_options_{{ product_id }}[size][current][material],current,$ul_{{ product_id }},_this);
+                  }
+                  break;
+                case 2:
+                  if (product_options_{{ product_id }}[size] != undefined && product_options_{{ product_id }}[size][color] != undefined && product_options_{{ product_id }}[size][color][current] != undefined) {
+                    removeAbsentOption_{{ product_id }}(product_options_{{ product_id }}[size][color][current],current,$ul_{{ product_id }},_this);
+                  }
+                  break;
+              }
+            }
+          }
+        }
+        else if($ul_{{ product_id }}.length == 2)
+        {
+          for (color in product_options_{{ product_id }}[size]) {
+            switch (_this.closest('ul').data('index')) {
+              case 0:
+                if (product_options_{{ product_id }}[current] != undefined && product_options_{{ product_id }}[current][color] != undefined) {
+                  removeAbsentOption_{{ product_id }}(product_options_{{ product_id }}[current][color], current, $ul_{{ product_id }},_this);
+                }
+                break;
+              case 1:
+                if (product_options_{{ product_id }}[size] != undefined && product_options_{{ product_id }}[size][current] != undefined) {
+                  removeAbsentOption_{{ product_id }}(product_options_{{ product_id }}[size][current], current, $ul_{{ product_id }},_this);
+                }
+                break;
+            }
+          }
+        }
+        else
+        {
+          if (product_options_{{ product_id }}[current] != undefined) {
+            removeAbsentOption_{{ product_id }}(product_options_{{ product_id }}[current],current,$ul_{{ product_id }},_this);
+          }
+        }
+      }
+    })
+  }
+
+  function renderSwatches_{{ product_id }}()
+  {   
+    showAvailableOptions_{{ product_id }}(); //2nd and 3rd
+    showAvailableOptions_{{ product_id }}(true); //1st only
+    $('li.active.absent-option',$ul_{{ product_id }}).each(function(){
+      $(this).removeClass('active').siblings().not('.absent-option').first().addClass('active');
+    });
+    showAvailableOptions_{{ product_id }}(false,true); //1st only
+    $('li.active.absent-option',$ul_{{ product_id }}).each(function(){
+      $(this).removeClass('active').siblings().not('.absent-option').first().addClass('active');
+    });
+  }
+
+  $(function($) {
+    {% unless product_options == 'swatches' %}updateSelectOptionsDisabling_{{ product_id }}();{% endunless %}
+    $select_{{ product_id }}.first().addClass('first');
+    $ul_{{ product_id }}.first().addClass('first');
+    $select_{{ product_id }}.change(function(){
+      {% unless product_options == 'swatches' %}updateSelectOptionsDisabling_{{ product_id }}();{% endunless %}
+      if($(this).hasClass('first'))
+      {
+        for (var first_option_to_select in product_options_{{ product_id }}[$select_{{ product_id }}.first().val()])break;
+        $('option',$select_{{ product_id }}.not(':first')).removeAttr("selected");
+        $('option[value='+first_option_to_select+']',$select_{{ product_id }}.not(':first')).attr("selected","selected");
+      }
+      updateData('select',product_id,options_product_id);
+      Currency.convertAll('{{ shop.currency }}', Currency.cookie.read());
+                          })
+      {% if product_options == 'swatches' %}
+
+      $('a',$ul_{{ product_id }}).click(function(e){
+        _this = $(this);
+        if(!_this.parent().hasClass('absent-option')){
+          if (!_this.parent('li').is('.active')){
+            _this.closest('ul').find('li').removeClass('active');
+            _this.parent('li').addClass('active');
+          }          
+          renderSwatches_{{ product_id }}();
+          $this=$('ul.color-list:first > li.active:first > a:first',$options_{{ product_id }});
+          if($this.data('image')){
+            var $image = $('.main-image img',$ul_{{ product_id }});
+            imgSrc = $this.data('image');
+            var newImg = document.createElement("img");
+            newImg.src = imgSrc;
+            newImg.onload = function () {
+              $image.attr('src', imgSrc);
+              $image.attr('data-zoom-image', imgSrc);
+            }
+          }
+          updateData('ul > li.active > a',{{ product_id }},$options_{{ product_id }});
+          Currency.convertAll('{{ shop.currency }}', Currency.cookie.read());
+                              }
+                              e.preventDefault();
+        })
+
+        renderSwatches_{{ product_id }}();
+        {% endif %}
+      });
+</script>

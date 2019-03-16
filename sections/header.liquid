@@ -1,0 +1,1029 @@
+{% include 'global_vars' %}
+{% assign header_width = '' %}
+{% assign style = section.settings.style %}
+{% if style == '12' and template != 'index' %}{% assign style = '1' %}{% endif %}
+{% assign style_file = 'header-style-' | append:style %}
+{% if home and slides_mode %}{% assign style_file = 'header-style-13' %}{% endif %}
+{% include style_file %}
+{% schema %}
+    {
+        "name": "Header",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Layout"
+            },
+            {
+                "type": "select",
+                "id": "style",
+                "label": "Style for Desktop",
+                "options": [
+                    { "value": "1", "label": "Header 1 (Default)" },
+                    { "value": "2", "label": "Header 2" },
+                    { "value": "3", "label": "Header 3" },
+                    { "value": "4", "label": "Header 4" },
+                    { "value": "5", "label": "Header 5 (dark bg, t-hisrts home page style)"},
+                    { "value": "6", "label": "Header 6" },
+                    { "value": "7", "label": "Header 7" },
+                    { "value": "8", "label": "Header 8" },
+                    { "value": "9", "label": "Header 9 (transparent on Home page for slider)" },
+                    { "value": "10", "label": "Header 10 (side navigation,transparent for slider)" },
+                    { "value": "11", "label": "Header 11 (transparent for slider)" },
+                    { "value": "12", "label": "Header 12 (with own slider)" }
+                ],
+                "default": "1",
+                "info": "Slides for header 12 are located in the General settings/Slides for Header 12"
+            },{
+                "type": "select",
+                "id": "style_mobile",
+                "label": "Style for Mobile",
+                "options": [
+                    { "value": "1", "label": "Header 1 (+phone)" },
+                    { "value": "2", "label": "Header 2 (Short)" }
+                ],
+                "default": "1"
+            },
+            {
+                "type": "header",
+                "content": "Logo"
+            },
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo image"
+            },
+            {
+                "type": "text",
+                "id": "logo_max_width",
+                "label": "Custom logo width (in pixels)",
+                "default": "140"
+            },
+            {
+                "type": "checkbox",
+                "id": "languages",
+                "label": "Show languages",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "currencies",
+                "label": "Show currencies",
+                "default": true
+            },
+            {
+                "type": "checkbox",
+                "id": "header_search",
+                "label": "Show Search",
+                "default": true
+            },{
+                "type": "textarea",
+                "id": "search_keywords",
+                "label": "Search keywords",
+                "info": "write keywords, separated by coma, for example:Jeans,Sunglazsses,hand bags,Discount,St.Valentine’s gift,maxi dress,Underwear,new in clothing,men tops",
+                "default": "Jeans,Sunglazsses,hand bags,Discount,St.Valentine’s gift,maxi dress,Underwear,new in clothing,men tops"
+            },
+            {
+                "type": "checkbox",
+                "id": "login_box",
+                "label": "Show Login Box",
+                "default": true
+            },
+            {
+                "type": "textarea",
+                "id": "delivery",
+                "label": "Delivery",
+                "default": "<span>FREE</span> STANDARD DELIVERY ON ORDERS OVER $ 150",
+                "info": "is showing on the Headers 1,3,6,11 and if 'Slides mode' is disabled"
+            },
+            {
+                "type": "textarea",
+                "id": "phone_1",
+                "label": "Phone 1",
+                "default": "<i class='icon icon-mobile'></i><b>8 800 265 89 56</b>",
+                "info": "is showing on the Headers 1,3,11,12 and if 'Slides mode' is disabled"
+            },{
+                "type": "textarea",
+                "id": "phones",
+                "label": "Phones for header 6",
+                "default": "8 800 265 89 56<br /> 8 800 265 89 56"
+            },
+          {
+            "type": "header",
+            "content": "Sticky header"
+          },
+          {
+            "type": "checkbox",
+            "id": "sticky",
+            "label": "Show",
+            "default": true
+          },
+{
+"type": "header",
+"content": "Only For Style 5"
+},
+{
+"type":"textarea",
+"id":"html_header_5",
+"label":"Paste generated banners html here",
+"info":"generate banners [here](http://frontend.big-skins.com/goodwin-html/banners-generator)"
+},
+
+{
+"type": "header",
+"content": "Topline"
+},
+{
+"type": "checkbox",
+"id": "topline_enable",
+"label": "Enable",
+"default": true
+},
+{
+"type": "text",
+"id": "topline_caption",
+"label": "Text",
+"default":"GET 10% OFF YOUR FIRST ORDER WITH CODE <span style='color: #000'>GOODWIN</span>&nbsp;<span class='hidden-xs'>&nbsp;|&nbsp;&nbsp; FREE GROUND SHIPPING OVER $250</span>"
+},{
+"type": "text",
+"id": "topline_expires",
+"label": "Expires days:",
+"info":"period to show after click x",
+"default":"1"
+},
+            {
+                "type": "header",
+                "content": "Navigation"
+            },
+{
+"type": "paragraph",
+"content": "[Documentation](http://big-skins.com/goodwin/shopify/manuals/#SetupNavigation)"
+},
+{
+                "type": "paragraph",
+                "content": "You can choose default Shopify dropdown navigation from selectbox or create Megamenu dropdowns with our sections constructor"
+            },
+            {
+                "type":"link_list",
+                "id":"default_navigation",
+                "label":"Default navigation",
+                "info":"if you select 'None' then the Megamenu that is based on sections will be enabled",
+                "default":"main-menu"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "tree",
+                "name": "Navigation Item - Simple",
+                "settings": [
+                    {
+                        "type":"checkbox",
+                        "id":"enable",
+                        "label":"Enable",
+                        "default":true
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title",
+                        "default":"Item"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link",
+                        "label": "Url"
+                    },
+                    {
+                        "type": "text",
+                        "id": "label",
+                        "label": "Label",
+                        "info":"1st level items only"
+                    },
+                    {
+                        "type": "select",
+                        "id": "label_color",
+                        "label": "Label color",
+                        "options": [
+                            { "value": "1", "label": "Color 1" },
+                            { "value": "2", "label": "Color 2" },
+                            { "value": "3", "label": "Color 3" },
+                            { "value": "4", "label": "Color 4" }
+                        ],
+                        "default": "1",
+                        "info":"change color in General Settings/Colors"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"dropdown_list",
+                        "label":"Dropdown navigation"
+                    }
+                ]
+            },
+            {
+                "type": "columns",
+                "name": "Navigation Item - Columns",
+                "settings": [
+                    {
+                        "type":"checkbox",
+                        "id":"enable",
+                        "label":"Enable",
+                        "default":true
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title",
+                        "default":"Item"
+                    },
+                    {
+                        "type": "url",
+                        "id": "link",
+                        "label": "Url"
+                    },
+                    {
+                        "type": "text",
+                        "id": "label",
+                        "label": "Label",
+                        "info":"1st level items only"
+                    },
+{
+"type": "select",
+"id": "label_color",
+"label": "Label color",
+"options": [
+{ "value": "1", "label": "Color 1" },
+{ "value": "2", "label": "Color 2" },
+{ "value": "3", "label": "Color 3" },
+{ "value": "4", "label": "Color 4" }
+],
+"default": "1",
+"info":"change color in General Settings/Colors"
+},
+                    {
+                        "type": "select",
+                        "id": "columns_in_row",
+                        "label": "Columns in one row",
+                        "options": [
+                            { "value": "2", "label": "2" },
+                            { "value": "3", "label": "3" },
+                            { "value": "4", "label": "4" },
+                            { "value": "5", "label": "5" },
+                            { "value": "6", "label": "6" }
+                        ],
+                        "default": "4"
+                    },
+                    {
+                        "type":"header",
+                        "content":"Navigation's columns"
+                    },
+                    {
+                        "type":"header",
+                        "content":"Column 1"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_1_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_1_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_1_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_1_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_1_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 2"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_2_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_2_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_2_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_2_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_2_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 3"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_3_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_3_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_3_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_3_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_3_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 4"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_4_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_4_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_4_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_4_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_4_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 5"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_5_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_5_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_5_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_5_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_5_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 6"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_6_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_6_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_6_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_6_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_6_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 7"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_7_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_7_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_7_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_7_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_7_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 8"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_8_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_8_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_8_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_8_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_8_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 9"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_9_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_9_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_9_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_9_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_9_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 10"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_10_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_10_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_10_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_10_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_10_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 11"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_11_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_11_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_11_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_11_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_11_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 12"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_12_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_12_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_12_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_12_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_12_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 13"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_13_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_13_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_13_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_13_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_13_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 14"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_14_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_14_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_14_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_14_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_14_list",
+                        "label":"Navigation"
+                    },
+                                        {
+                        "type":"header",
+                        "content":"Column 15"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"nav_col_15_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"nav_col_15_preview",
+                        "label":"Preview",
+                        "info":"268x207 px"
+                    },
+                    {
+                        "type":"text",
+                        "id":"nav_col_15_title",
+                        "label":"Title",
+                        "default":"Column title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"nav_col_15_link",
+                        "label":"Url",
+                        "info":"for preview and title"
+                    },
+                    {
+                        "type":"link_list",
+                        "id":"nav_col_15_list",
+                        "label":"Navigation"
+                    },
+                    {
+                        "type":"header",
+                        "content":"Left Column"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"left_col_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                        "type": "radio",
+                        "id": "left_col_src",
+                        "label": "What to show?",
+                        "options": [
+                            { "value": "html", "label": "Html" },
+                            { "value": "carousel", "label": "Carousel" }
+                        ],
+                        "default": "html"
+                    },
+                    {
+                        "type":"textarea",
+                        "id":"left_col_html",
+                        "label":"Html"
+                    },
+                    {
+                    "type":"collection",
+                    "id":"left_col_collection",
+                    "label":"Carousel",
+                    "info":"Choose collection for  carousel. Limit is 4 products"
+                    },
+                    {
+                        "type": "select",
+                        "id": "left_col_html_width",
+                        "label": "Width",
+                        "options": [
+                            { "value": "20", "label": "20%" },
+                            { "value": "25", "label": "25%" }
+                        ],
+                        "default": "20"
+                    },
+                    {
+                        "type":"header",
+                        "content":"Right Column"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"right_col_yes",
+                        "label":"Enable",
+                        "default":false
+                    },
+                    {
+                    "type": "radio",
+                    "id": "right_col_src",
+                    "label": "What to show?",
+                    "options": [
+                    { "value": "html", "label": "Html" },
+                    { "value": "carousel", "label": "Carousel" }
+                    ],
+                    "default": "html"
+                    },
+                    {
+                        "type":"textarea",
+                        "id":"right_col_html",
+                        "label":"Html",
+                        "info":"generate banners [here](http://frontend.big-skins.com/goodwin-html/banners-generator)"
+                    },
+{
+"type":"collection",
+"id":"right_col_collection",
+"label":"Carousel",
+"info":"Choose collection for  carousel. Limit is 4 products"
+},
+                    {
+                        "type": "select",
+                        "id": "right_col_html_width",
+                        "label": "Width",
+                        "options": [
+                            { "value": "20", "label": "20%" },
+                            { "value": "25", "label": "25%" }
+                        ],
+                        "default": "20"
+                    },
+                    {
+                        "type":"header",
+                        "content":"Bottom Row"
+                    },
+                    {
+                        "type":"checkbox",
+                        "id":"btm_row_yes",
+                        "label":"Enable",
+                        "default":true
+                    },
+                    {
+                        "type":"textarea",
+                        "id":"btm_row_html",
+                        "label":"Html",
+"default":"<div class='custom-text'><span>FREE</span> STANDARD DELIVERY ON ORDERS OVER $ 150</div> <div class='custom-text'><span>100%</span> money back guarantee</div> <div class='custom-text'><span>24/7</span> customer support</div>"
+}
+                ]
+            },
+{
+"type": "shop_by",
+"name": "Navigation Item - Shop By",
+"settings": [
+{
+"type":"checkbox",
+"id":"enable",
+"label":"Enable",
+"default":true
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default":"Item"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Url"
+},
+{
+"type": "text",
+"id": "label",
+"label": "Label",
+"info":"1st level items only"
+},
+{
+"type": "select",
+"id": "label_color",
+"label": "Label color",
+"options": [
+{ "value": "1", "label": "Color 1" },
+{ "value": "2", "label": "Color 2" },
+{ "value": "3", "label": "Color 3" },
+{ "value": "4", "label": "Color 4" }
+],
+"default": "1",
+"info":"change color in General Settings/Colors"
+},
+{
+"type":"header",
+"content":"SHOP BY COLLECTION"
+},
+{
+"type":"checkbox",
+"id":"nav_col_1_yes",
+"label":"Enable",
+"default":true
+},
+{
+"type":"link_list",
+"id":"nav_col_1_list",
+"label":"Collections navigation"
+},
+{
+"type":"header",
+"content":"SHOP BY BRAND"
+},
+{
+"type":"checkbox",
+"id":"nav_col_2_yes",
+"label":"Enable",
+"default":true
+},
+{
+"type":"text",
+"id":"nav_col_2_title",
+"label":"Title",
+"default":"SHOP BY BRAND"
+},
+{
+"type":"link_list",
+"id":"nav_col_2_list",
+"label":"Brands navigation"
+},
+{
+"type":"header",
+"content":"SHOP BY COLOR"
+},
+{
+"type":"checkbox",
+"id":"nav_col_3_yes",
+"label":"Enable",
+"default":true
+},
+{
+"type":"text",
+"id":"nav_col_3_title",
+"label":"Title",
+"default":"SHOP BY COLOR"
+},
+{
+"type":"link_list",
+"id":"nav_col_3_list",
+"label":"Colors Navigation",
+"info":"IMPORTANT! color names in the navigation must be taken from [here](https://www.w3schools.com/colors/colors_names.asp) "
+},
+{
+"type":"header",
+"content":"SHOP BY STYLE"
+},
+{
+"type":"checkbox",
+"id":"nav_col_4_yes",
+"label":"Enable",
+"default":true
+},
+{
+"type":"text",
+"id":"nav_col_4_title",
+"label":"Title",
+"default":"SHOP BY STYLE"
+},
+{
+"type":"link_list",
+"id":"nav_col_4_list",
+"label":"Styles navigation"
+},
+{
+"type":"header",
+"content":"Right Column"
+},
+{
+"type":"checkbox",
+"id":"right_col_yes",
+"label":"Enable",
+"default":false
+},
+{
+"type":"textarea",
+"id":"right_col_html",
+"label":"Html",
+"info":"generate banner [here](http://frontend.big-skins.com/goodwin-html/banners-generator)"
+},
+{
+"type":"header",
+"content":"Bottom Row"
+},
+{
+"type":"checkbox",
+"id":"btm_row_yes",
+"label":"Enable",
+"default":true
+},
+{
+"type":"textarea",
+"id":"btm_row_html",
+"label":"Html",
+"default":"<div class='custom-text'><span>FREE</span> STANDARD DELIVERY ON ORDERS OVER $ 150</div> <div class='custom-text'><span>100%</span> money back guarantee</div> <div class='custom-text'><span>24/7</span> customer support</div>"
+}
+]
+}
+        ]
+    }
+{% endschema %}

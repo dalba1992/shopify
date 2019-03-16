@@ -1,0 +1,14 @@
+{% if in_header == 1 %}<div class="hdr-line-separate">{% endif %}
+<ul class="social-list {{ class }}">
+{% if settings.social_facebook_link != blank %}
+    <li><a target="_blank" href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+        <svg class="icon-social-fb"><use xlink:href="#icon-social-fb"></use></svg>
+    </a></li>
+{% endif %}
+{% if settings.social_instagram_link != blank %}
+    <li><a target="_blank" href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+            <svg class="icon-social-ig"><use xlink:href="#icon-social-ig"></use></svg>
+        </a></li>
+{% endif %}
+</ul>
+{% if in_header == 1 %}</div>{% endif %}

@@ -1,0 +1,45 @@
+{% assign show_only = '' %}
+<div class="holder mt-0">
+  <div class="container">
+    <div class="page-title text-center">
+      <div class="title">
+        <h1>{{ 'collections.general.title' | t }}</h1>
+      </div>
+    </div>
+    <div class="row collections-wrap collections-list mobile-sm-pad">
+      {% for collection in collections %}
+      {% unless collection.handle == 'frontpage' %}
+      {% assign featured = collection.handle %}
+      {% capture collection_title %}{{ collections[featured].title | escape }}{% endcapture %}
+      {% assign flag = 0 %}
+      {% for check in show_only %}{% if check == collection.title %}{% assign flag = 1 %}{% endif %}{% endfor %}
+      {% if flag == 1 %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <div class="collection-item zoom-out">
+          <div class="collection-item-img">
+            <a href="{{ collection.url }}">
+              {% if collections[featured].image %}
+              <img src="{{ collections[featured].image.src | img_url: '288x' }}" srcset="{{ collections[featured].image.src | img_url: '288x',scale:2 }} 2x" alt="{{ collection_title }}">
+              {% else %}
+              <img src="{{ collections[featured].products.first.featured_image | img_url: '288x' }}" srcset="{{ collections[featured].image.src | img_url: '288x',scale:2 }} 2x" alt="{{ collection_title }}">
+              {% endif %}
+              <span class="collection-item-hover">
+                <span>
+                  {% for product_vendor in collection.all_vendors limit:12 %}
+                  <span>{{ product_vendor }}</span>
+                  {% endfor %}
+                </span>
+              </span>
+            </a>
+          </div>
+          <h3 class="collection-item-title"><a href="{{ collection.url }}">{{ collection.title }}</a></h3>
+          <p>{{ collection.all_products_count }} products</p>
+        </div>
+      </div>
+      {% endif %}
+      {% endunless %}
+      {% endfor %}
+    </div>
+    <div class="more-link-wrapper text-center  mt-3"><a href="collections/all/" class="btn-decor">All products</a></div>
+  </div>
+</div>

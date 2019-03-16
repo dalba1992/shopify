@@ -1,0 +1,7 @@
+/* BOLD.CSS
+  To include this file in your theme, add the following before the closing </head> tag in theme.liquid
+  {{ 'bold.css' | asset_url | stylesheet_tag }}
+*/
+.bold_option_element input[type=radio] {
+    display: inline-block !important;
+}

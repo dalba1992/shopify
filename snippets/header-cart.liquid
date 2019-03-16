@@ -1,0 +1,139 @@
+<div class="minicart minicart-js">
+    <a href="/cart">
+        <svg class="icon-cart"><use xlink:href="#icon-cart"></use></svg>
+        <span class="minicart-qty">{{ cart.item_count }}</span>
+    </a>
+    <div class="minicart-drop">
+        <div class="holder">
+            <div class="container py-3 minicart-drop-close">
+              <div class="row">
+              <div class="col h3 mb-0">Your Cart</div>
+              <div class="col-auto ml-auto pr-4 h4 mb-0"><svg class="icon-cross"><use xlink:href="#icon-cross"></use></svg></div>
+          </div>
+          </div>
+          <div class="container pb-3 minicart-drop-content">
+          {% if cart.item_count > 0 %}
+              {% for item in cart.items %}
+              <div class="row py-3 cart-list-prd">
+                <div class="col-3 col-lg-1">
+                  <div class="row">
+                      <div class="col-12">
+                          <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                              <img src="{{ item | img_url: 'grande' }}" width="100%" alt="{{ item.title | escape }}">
+                          </a>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-7 col-lg-10 px-0">
+                  <div class="row">
+                    <div class="col-12 col-lg-6 minicart-prd-name">
+                      	<div class="font-weight-bold text-truncate"><a href="{{ item.url }}" title="{{ item.title }}">{{ item.product.title }}</a></div>
+                        {% unless item.variant.title contains 'Title' %}<div>{{ item.variant.title }}</div>{% endunless %}
+                        <script>
+                          $(function () {
+                            $('[data-toggle="popover"]').on('click',function(e){
+                              e.preventDefault();
+                            }).popover()
+                          })
+                        </script>
+                        <a href="#" class="options-dropdown" tabindex="0" data-toggle="popover" data-trigger="focus" data-html="true" data-boundary="viewport" data-placement="bottom" data-content="
+                          <div class='options_title'>
+                              {% assign propertySize = item.properties | size %}
+                              {% if propertySize > 0 %}
+                                  {% for p in item.properties %}
+                                  <div>{% assign first_character_in_key = p.first | truncate: 1, '' %}
+                                      {% unless p.last == blank or first_character_in_key == '_' %}
+                                      {{ p.first }}:
+                                      {% if p.last contains 'https://' %}
+                                          <span><a href='{{ p.last }}' target='_blank'>Uploaded</a></span>
+                                      {% else %}
+                                    <span>{{ p.last }}</span><br/>
+                                      {% endif %}
+
+                                      {% endunless %}
+                                  </div>
+                                  {% endfor %}
+                              {% endif %}
+                          </div>" >Options <svg class="icon-angle-down" style="font-size:14px;"><use xlink:href="#icon-angle-down"></use></svg>
+                        </a>
+                    </div>
+                    <div class="col-6 col-lg-2">{{ 'cart.label.quantity' | t }}: {{ item.quantity }}</div>
+                    <div class="col-6 col-lg-2">{{ item.price | money }}</div>
+                  </div>
+                </div>
+                <div class="col-2 col-lg-1 pt-3 text-center minicart-prd-action">
+                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" data-variant-id="{{ item.variant_id }}" data-line-number="{{ forloop.index }}"  title="{{ 'cart.general.remove' | t }}" class="js-minicart-remove-item"><svg class="icon-trash"><use xlink:href="#icon-trash"></use></svg></a>
+                </div>
+              </div>
+              {% endfor %}
+            {% endif %}  
+          </div>
+          
+          <div class="minicart-drop-total py-3">
+          {% if cart.item_count > 0 %}
+              <div class="container">
+                <div class="row">
+                <div class="col-12 col-lg-5 order-lg-3">
+                  <div class="row">
+                      <div class="col-auto mr-auto mb-2">
+                         Subtotal ({{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }}):
+                      </div>
+                      <div class="col-auto mb-2 product-price-bold-total">
+                          <b>{{ cart.total_price | money }}</b>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="minicart-drop-btns-wrap">
+                        <a href="/checkout" class="btn btn-primary btn-lg btn-block mt-0 font-26">{{ 'general.theme.go_to_checkout' | t }}</a>
+                      </div>
+                    </div>
+               	 </div>
+              	</div>
+                  <div class="col-12 col-lg-4 order-lg-2 mt-3 mt-lg-0 secure-checkout">
+                    <div class="secure-title"><svg class="icon-lock-solid mr-1"><use xlink:href="#icon-lock-solid"></use></svg><span>100% Secure Checkout</span></div>
+                  <div class="secure-icons text-center"><svg class="icon-secure-mcafee mr-2"><use xlink:href="#icon-secure-mcafee"></use></svg>
+                    <svg class="icon-secure-norton"><use xlink:href="#icon-secure-norton"></use></svg></div>
+                </div>
+                <div class="col-12 col-lg-3 d-flex flex-lg-column order-lg-1 mt-3 mt-lg-0 payment-icons">
+                <div class="d-flex mb-lg-2">
+                <svg class="icon-payment-visa"><use xlink:href="#icon-payment-visa"></use></svg>
+                <svg class="icon-payment-mastercard"><use xlink:href="#icon-payment-mastercard"></use></svg>
+                <svg class="icon-payment-discover"><use xlink:href="#icon-payment-discover"></use></svg>
+                <svg class="icon-payment-amex"><use xlink:href="#icon-payment-amex"></use></svg>
+                  </div>
+                  <div class="d-flex">
+                <svg class="icon-payment-paypal"><use xlink:href="#icon-payment-paypal"></use></svg>
+                <svg class="icon-payment-amazon-pay"><use xlink:href="#icon-payment-amazon-pay"></use></svg>
+                <svg class="icon-payment-apple-pay"><use xlink:href="#icon-payment-apple-pay"></use></svg>
+                <svg class="icon-payment-google-pay"><use xlink:href="#icon-payment-google-pay"></use></svg>
+                  </div>
+                </div>
+                  </div>
+            </div>
+           
+          	{% endif %}  
+          </div>
+            <div class="container py-5 pb-lg-0 mx-auto cart-empty">
+              {% if cart.item_count == 0 %}
+                <div class="row">
+                  <div class="col-12 col-lg-auto">
+                    <img src="{{ 'empty-cart_1x.jpg' | asset_url }}" srcset="{{ 'empty-cart_1x.jpg' | asset_url }} 1x, {{ 'empty-cart_2x.jpg' | asset_url }} 2x, {{ 'empty-cart_3x.jpg' | asset_url }} 3x, {{ 'empty-cart_4x.jpg' | asset_url }} 4x">
+                  </div>
+                  <div class="col-12 col-lg-auto mt-3 mt-lg-0 cart-empty-text">
+                    <h3 class="cart-empty-title">Your Cart Is Empty!</h3>
+                    <p>{{ 'general.theme.empty_minicart_text_2' | t }} <a href="collections/all/">{{ 'general.theme.empty_minicart_text_3' | t }}</a></p>
+                  </div>
+                </div>
+              {% endif %}    
+            </div>
+            
+    </div>
+</div>
+<script>
+  var preSavedEmail = sessionStorage.getItem('customer_email');
+  if (preSavedEmail) {
+    $('.minicart-drop-btns-wrap a:first-child').attr('href', '/checkout?checkout[email]=' + preSavedEmail);
+  }
+ 
+</script>

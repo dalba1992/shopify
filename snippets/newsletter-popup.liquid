@@ -1,0 +1,51 @@
+{% if settings.newsletter_popup_yes %}
+    <div style="display: none;" class="modal--newsletter js-newslettermodal" data-pause="5000" data-expires="{{ settings.newsletter_popup_expires }}">
+        <div class="row no-gutters">
+            <div class="col-sm d-none d-md-flex align-items-center justify-content-center">
+                <div class="newslettermodal-img">
+                    {% assign bg = settings.newsletter_popup_bg %}
+                    {% if bg != blank %}
+                        {% assign bg = bg | img_url:'512x547' %}
+                    {% else %}
+                        {% assign bg = 'newsletter-popup-fashion.png'  | asset_url %}
+                    {% endif %}
+                    <img src="{{ bg }}" alt="{{ 'general.theme.subscribe_us' | t }}">
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="newslettermodal-content">
+                    <div class="newslettermodal-content-center">
+                        {% assign logo = settings.newsletter_popup_logo %}
+                        {% if logo != blank %}
+                            {% assign logo = logo | img_url:'master' %}
+                        {% else %}
+                            {% assign logo = 'logo.png'  | asset_url %}
+                        {% endif %}
+                        <div class="newslettermodal-content-logo"><img src="{{ logo }}" alt="{{ shop.title }}" srcset="{{ logo }} 1x, {{ logo_2x }} 2x"></div>
+                        <h3 class="h2-style newslettermodal-content-title">{{ settings.newsletter_popup_title }}</h3>
+                        <div class="newslettermodal-content-text">{{ settings.newsletter_popup_desc }}</div>
+                        {% form 'customer', class: 'newslettermodal-content-form', id:'newsletter-popup' %}
+                        {% if form.posted_successfully? %}
+                            <p class="form--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                        {% else %}
+                            <div class="form-group">
+                                <input type="hidden" name="contact[tags]" value="newsletter">
+                                <input type="email" name="contact[email]"  class="form-control" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.theme.enter_email' | t }}"  >
+                                {{ form.errors | default_errors }}
+                            </div>
+                            <button type="submit" class="btn mt-15">{{ 'general.theme.subscribe' | t }}</button>
+                            <div class="checkbox-group mt-2">
+                                <input type="checkbox" name="newsletter" id="newsLetterCheckBox">
+                                <label for="newsLetterCheckBox">{{ 'general.theme.donot_show' | t }}</label>
+                            </div>
+                        {% endif %}
+                        {% endform %}
+                        <div class="newslettermodal-content-socials">
+                            {% include 'social-media-links' class:'mt-3' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

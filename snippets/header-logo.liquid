@@ -1,0 +1,9 @@
+{%- assign logo_max_width = section.settings.logo_max_width -%}
+{%- assign logo = section.settings.logo -%}
+{% if logo != blank %}
+    {% assign logo = logo | img_url: image_size %}
+    {% assign logo_2x = logo | img_url: image_size, scale: 2 %}
+{% endif %}
+<a href="{{ shop.url }}" title="{{ shop.name }}" class="logo">
+  <svg class="icon-ilovepaws-logo"><use xlink:href="#icon-ilovepaws-logo"></use></svg>
+</a>

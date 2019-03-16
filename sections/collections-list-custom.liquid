@@ -1,0 +1,170 @@
+{% unless settings.slides_mode %}
+<div class="holder fullboxed {{ section.settings.outer_margin }} py-3 py-lg-4 holder-bg-05">
+    <div class="container">
+        <div class="title-wrap text-center">
+            <div class="h1-style"><b>{{ section.settings.heading }}</b></div>
+            <div class="h4-style under-title">{{ section.settings.description }}</div>
+            {% if section.settings.link != blank %}<div><a href="{{ section.settings.link }}" class="btn-decor btn-decor--lg">{{ section.settings.link_title }}</a></div>{% endif %}
+        </div>
+    </div>
+</div>
+<div class="holder">
+    <div class="container">
+        <div class="collections-wrap row">
+            {% for block in section.blocks %}
+            {% if block.settings.enable %}
+            <div class="col-6 col-sm-4">
+                <div class="collection-item zoom-out">
+                    <div class="collection-item-img">
+                        <a href="{{ block.settings.link }}"><img src="{% if block.settings.image %}{{ block.settings.image | img_url:'master' }}{% else %}{{ 'collection-fashion2-03.jpg'  | asset_url }}{% endif %}" alt="{{ block.settings.title }}"></a>
+                        {% if block.settings.enable_custom_links %}
+                        <span class="collection-item-hover">
+							<span>
+								{{ block.settings.custom_links }}
+							</span>
+						</span>
+                        {% endif %}
+                    </div>
+                    <h3 class="collection-item-title"><a href="{{ block.settings.link }}">{{ block.settings.title }}</a></h3>
+                    <p>{{ block.settings.description }}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endunless %}
+{% schema %}
+{
+"name": "Collections list Manual",
+"class": "index-section",
+"settings": [
+{
+"type": "header",
+"content": "Layout"
+},
+{
+"type": "select",
+"id": "outer_margin",
+"label": "Outer top margin",
+"options":[
+{"value":"mt-0","label":"None"},
+{"value":"mt-1","label":"10px"},
+{"value":"mt-2","label":"20px"},
+{"value":"mt-3","label":"30px"},
+{"value":"mt-4","label":"40px"},
+{"value":"mt-5","label":"50px"},
+{"value":"mt-6","label":"60px"},
+{"value":"mt-65","label":"65px"},
+{"value":"mt-7","label":"70px"},
+{"value":"mt-8","label":"80px"},
+{"value":"mt-9","label":"90px"},
+{"value":"mt-10","label":"100px"}
+],
+"default": "mt-0"
+},
+{
+"type": "header",
+"content": "General"
+},
+{
+"type": "text",
+"id": "heading",
+"label": "Heading",
+"default": "BUY ONE GET ONE 50% OFF ALL JEANS"
+},
+{
+"type": "text",
+"id": "description",
+"label": "Description",
+"default": "DON'T MISS OUT ON THE BIGGEST SALE DISCOUNTS OF TE SEASON"
+},
+{
+"type": "text",
+"id": "link_title",
+"label": "Link text",
+"default":"SHOP NOW"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Link"
+}
+],
+"blocks": [
+{
+"type": "collection",
+"name": "Collection",
+"settings": [
+{
+"type":"checkbox",
+"id":"enable",
+"label":"Enable",
+"default":true
+},
+{
+"type": "text",
+"id": "title",
+"label": "Name",
+"default": "Collection name"
+},
+{
+"type": "text",
+"id": "description",
+"label": "Name",
+"default": "Collection description"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image",
+"info":"recommended size 360x342px"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Collection link"
+},
+{
+"type": "checkbox",
+"id": "enable_custom_links",
+"label": "Enable custom links",
+"info": "adds multiple rollOver custom links",
+"default":false
+},
+{
+"type": "text",
+"id": "custom_links",
+"label": "Multiple rollover links",
+"default": "<a href='#' class='btn-decor'>shop men’s</a> <a href='#' class='btn-decor'>shop women’s</a>"
+}
+]
+}
+],
+"presets": [{
+"name": "Collections list Manual",
+"category": "Collections list",
+"blocks": [
+{
+"type": "collection"
+},
+{
+"type": "collection"
+},
+{
+"type": "collection"
+},
+{
+"type": "collection"
+},
+{
+"type": "collection"
+},
+{
+"type": "collection"
+}
+]
+}]
+}
+{% endschema %}
