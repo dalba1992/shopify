@@ -260,7 +260,8 @@ if($('body').hasClass('ajax_cart'))
         var line_properties = getFormData($('[name*=properties]',$form));
         CartJS.addItem($('[name=id]',$form).val(), $('[name=quantity]',$form).val(),line_properties, {
             "success": function(data, textStatus, jqXHR) {
-                if($('.js-add-to-cart-product-page').length){                    
+
+                if($('.js-add-to-cart-product-page-checkout').length){                    
                     // _this.addClass('btn--loading');
                     // $('.js-add-to-cart-product-page').removeClass('btn--loading');
                     var url = 'https://www.ilovepaws.com/checkout';

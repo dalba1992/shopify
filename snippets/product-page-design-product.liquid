@@ -58,17 +58,17 @@
                                 </div>
                                 <div class="prd-block_info js-prd-m-holder mb-2 mb-md-0"></div>
                                 <script>
-                                  window.onscroll = function() {scrollFunction()};
+                  window.onscroll = function() {scrollFunction()};
 
-                                  function scrollFunction() {
-                                    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                                      document.getElementById("stickybutton").style.display = "block";
-                                    } else {
-                                      document.getElementById("stickybutton").style.display = "none";
-                                    }
-                                  }
-                                </script>
-                                <div id="stickybutton" class="btns-wrap" style="position:fixed;bottom:0;display:none;z-index:100;width:100%;background:#fff;padding:20px 15px;box-shadow:0 -3px 4px rgba(0,0,0,0.1);margin-left:-15px;">
+function scrollFunction() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    document.getElementById("stickybutton").style.display = "block";
+  } else {
+    document.getElementById("stickybutton").style.display = "none";
+  }
+}
+                </script>
+                <div id="stickybutton" class="btns-wrap" style="position:fixed;bottom:0;display:none;z-index:100;width:100%;background:#fff;padding:20px 15px;box-shadow:0 -3px 4px rgba(0,0,0,0.1);margin-left:-15px;">
 <script>
         console.log('here')
 
@@ -194,18 +194,29 @@ data-product-sku="{{product.handle}}">
                                                         {% endif %}
                                                         <div class="btns-wrap mt-0">
 
-                                                            <button type="submit" class="btn" data-variant-id="{{ product.selected_or_first_available_variant.id }}" title="{{ status }}">
+                                                            <button type="submit" class="btn" data-variant-id="{{ product.selected_or_first_available_variant.id }}" title="{{ status }}" data-toggle="modal" data-target="#myModal">
                                                                 <svg class="icon-add-to-cart" style="font-size:30px;">
                                                                     <use xlink:href="#icon-add-to-cart"></use>
                                                                 </svg>
                                                             </button>
                                                             {% comment %} Bold:POv2 {% endcomment %}
-                                                            <button class="btn btn-primary btn-lg font-24 btn--animate  js-add-to-cart-product-page-checkout" title="{{ status }}">
+                                                            <button class="btn btn-primary btn-lg font-24 btn--animate  js-add-to-cart-product-page-checkout" title="{{ status }}" data-toggle="modal" data-target="#myModal">
                                                                 <span class="text-sent">Processing...</span>
                                                                 <span>Buy Now</span>
                                                             </button>
                                                             {% comment %} Bold:POv2 {% endcomment %}
 
+                                                        </div>
+                                                        <div class="modal" id="myModal" role="dialog">
+                                                            <div
+                                                                class="modal-dialog">
+                                                                <div class="modal-content" style="padding:0; background-color:#0000009F; color:white; border-radius:40px; text-align:center">
+                                                                    <div class="modal-body">
+                                                                        <p>Added to cart</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="secure-checkout mt-4">
